@@ -1,0 +1,38 @@
+export interface Movement {
+  numero_recibo: string;
+  cod_contribuinte: string;
+  nome_contribuinte: string;
+  end_logradouro: string;
+  end_numero: string;
+  end_complemento: string;
+  end_referencia: string;
+  end_municipio: string;
+  end_municipio_cod: string;
+  end_bairro_cod: string;
+  end_bairro: string;
+  telefone1: string;
+  telefone2: string;
+  telefone3: string;
+  memo_obs_mensageiro: string;
+  valor_prev: string;
+  valor_pago: string;
+  cod_ultima_ocorrencia: string | null;
+  cod_banco_baixa: string;
+  turno: string;
+  status: string;
+  operador: string;
+  cod_tipo_pagamento: string;
+  ordem: string | null;
+  data_prev: string;
+  data_ultima_contribuicoes: string;
+  saldos: number;
+  doador_novo: boolean;
+  texto_obs: string;
+  usuario_baixa: string;
+  ultima_visita: string | null;
+  latitude: string;
+  longitude: string;
+  endereco_cobranca: string;
+  distancia: string;
+  data_baixa: Date | null | string;
+}

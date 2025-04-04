@@ -1,0 +1,55 @@
+import React, { useState } from 'react';
+import { View, Button, Text } from 'react-native';
+import BluetoothModule from './path/to/BluetoothModule';
+
+const App = () => {
+  const [isBluetoothEnabled, setBluetoothEnabled] = useState(false);
+  const [pairedDevices, setPairedDevices] = useState([]);
+
+  const checkBluetooth = async () => {
+    try {
+      const enabled = await BluetoothModule.isBluetoothEnabled();
+      setBluetoothEnabled(enabled);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const enableBluetooth = async () => {
+    try {
+      const enabled = await BluetoothModule.enableBluetooth();
+      setBluetoothEnabled(enabled);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchPairedDevices = async () => {
+    try {
+      const devices = await BluetoothModule.getPairedDevices();
+      setPairedDevices(devices);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <View>
+      <Button title="Verificar Bluetooth" onPress={checkBluetooth} />
+      <Text>Bluetooth Habilitado: {isBluetoothEnabled ? 'Sim' : 'Não'}</Text>
+
+      <Button title="Habilitar Bluetooth" onPress={enableBluetooth} />
+      <Button title="Buscar Dispositivos Pareados" onPress={fetchPairedDevices} />
+      {pairedDevices.length > 0 && (
+        <View>
+          <Text>Dispositivos Pareados:</Text>
+          {pairedDevices.map(device => (
+            <Text key={device}>{device}</Text>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+};
+
+export default App;
