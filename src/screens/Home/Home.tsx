@@ -42,7 +42,7 @@ import {formatNameOne} from '../../utils/Formatting/FormatNameMensseger';
 import {InstitutionInformation} from './../../database/entities/InstitutionInformation';
 import {ReceiptSettings} from '../../database/entities/ReceiptSettings';
 import {Shift as ShiftEntiti} from '../../database/entities/Shift';
-
+import DeviceInfo from 'react-native-device-info';
 //const {VersionModule} = NativeModules;
 
 export function Home() {
@@ -61,7 +61,7 @@ export function Home() {
   const [deactivateAccount, setDeactivateAccount] = useState(false);
   const [disableData, setDisableData] = useState(false);
   const [loading, setLoading] = useState(true);
-  //const [versionName, setVersionName] = useState<string>('');
+  const [versionName, setVersionName] = useState<string>('');
   const [block, setBlock] = useState(false);
   const [location, setLocation] = useState<{
     latitude: number;
@@ -83,15 +83,16 @@ export function Home() {
     Shift();
   }, []);
 
-  // useEffect(() => {
-  //   VersionModule.getVersionName()
-  //     .then((version: string) => {
-  //       setVersionName(version);
-  //     })
-  //     .catch((error: any) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const version = DeviceInfo.getVersion();
+    setVersionName(version);
+      // .then((version: string) => {
+      //   setVersionName(version);
+      // })
+      // .catch((error: any) => {
+      //   console.error(error);
+      // });
+  }, []);
 
   async function Block(OpeningTimeSystem: string, ClosingTimeSystem: string) {
     const now = new Date();
@@ -976,7 +977,7 @@ export function Home() {
           />
         </View>
         <View style={Styles.containerVersion}>
-          <Text style={Styles.versionText}>V {'versionName'}</Text>
+          <Text style={Styles.versionText}>V {versionName}</Text>
         </View>
       </ImageBackground>
     </>

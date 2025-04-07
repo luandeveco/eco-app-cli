@@ -14,7 +14,7 @@ import {useAuth} from '../../contexts/Auth';
 import {Styles} from './Style';
 import {TextInput} from 'react-native-gesture-handler';
 import {requestLocationPermission} from '../../components/Permissions';
-
+import DeviceInfo from 'react-native-device-info';
 //const {VersionModule} = NativeModules;
 
 function Login() {
@@ -24,7 +24,7 @@ function Login() {
   const [keyboardVerticalOffset, setKeyboardVerticalOffset] = useState(0);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  //const [versionName, setVersionName] = useState<string>('');
+  const [versionName, setVersionName] = useState<string>('');
   const {signIn} = useAuth();
   const passwordInputRef = useRef(null);
   useEffect(() => {
@@ -46,15 +46,16 @@ function Login() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   VersionModule.getVersionName()
-  //     .then((version: string) => {
-  //       setVersionName(version);
-  //     })
-  //     .catch((error: any) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const version = DeviceInfo.getVersion();
+    setVersionName(version);
+      // .then((version: string) => {
+      //   setVersionName(version);
+      // })
+      // .catch((error: any) => {
+      //   console.error(error);
+      // });
+  }, []);
 
   function handleLogin() {
     if (!codigo || !senha) {
@@ -158,7 +159,7 @@ function Login() {
             <Text style={Styles.textBotton}>Entrar</Text>
           </TouchableOpacity>
           <View style={Styles.containerVersion}>
-            <Text style={Styles.versionText}>V {'versionName'}</Text>
+            <Text style={Styles.versionText}>V {versionName}</Text>
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
