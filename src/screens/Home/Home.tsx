@@ -99,10 +99,7 @@ export function Home() {
     const hours = now.getHours().toString().padStart(2, '0');
     let minutes = now.getMinutes().toString().padStart(2, '0');
     const timeFormatted = `${hours}:${minutes}`;
-    if (
-      timeFormatted >= OpeningTimeSystem &&
-      timeFormatted <= ClosingTimeSystem
-    ) {
+    if (timeFormatted >= OpeningTimeSystem && timeFormatted <= ClosingTimeSystem) {
       setBlock(true);
     } else {
       clock();
@@ -122,10 +119,8 @@ export function Home() {
         },
       })
       .then(async function (response) {
-        const responseDataHoraAberturaSistema =
-          response.data[0].HoraAberturaSistema;
-        const responseDataHoraFechamentoSistema =
-          response.data[0].HoraFechamentoSistema;
+        const responseDataHoraAberturaSistema = response.data[0].HoraAberturaSistema;
+        const responseDataHoraFechamentoSistema = response.data[0].HoraFechamentoSistema;
 
         const shiftRepository = dataSource.getRepository(ShiftEntiti);
         const existingRecord = await shiftRepository
@@ -140,8 +135,7 @@ export function Home() {
 
         if (existingRecord) {
           existingRecord.HoraAberturaSistema = responseDataHoraAberturaSistema;
-          existingRecord.HoraFechamentoSistema =
-            responseDataHoraFechamentoSistema;
+          existingRecord.HoraFechamentoSistema = responseDataHoraFechamentoSistema;
 
           await shiftRepository.save(existingRecord);
         } else {
@@ -758,10 +752,7 @@ export function Home() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const timeFormatted = `${hours}:${minutes}`;
-    if (
-      timeFormatted >= ShiftDate.HoraAberturaSistema &&
-      timeFormatted <= ShiftDate.HoraFechamentoSistema
-    ) {
+    if ( timeFormatted >= ShiftDate.HoraAberturaSistema && timeFormatted <= ShiftDate.HoraFechamentoSistema) {
       setBlock(true);
     } else {
       setModalVisible(true);
