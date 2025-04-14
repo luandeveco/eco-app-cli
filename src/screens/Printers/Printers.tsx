@@ -44,13 +44,8 @@ export function Printers() {
   },[Print || PrintOutExclusion])
 
   async function PrintOutExclusion(id: string) {
-    await dataSource
-    .getRepository(Printer)
-    .createQueryBuilder()
-    .delete()
-    .from(Printer)
-    .where('id = :id', {id: id})
-    .execute().then(response =>{
+    await dataSource.getRepository(Printer).createQueryBuilder().delete().from(Printer)
+    .where('id = :id', {id: id}).execute().then(response =>{
       setModalAction(false);
       setModalCheck({
         Title: 'Sucesso',
@@ -93,13 +88,11 @@ export function Printers() {
       await printOuts
         .save(printNew)
         .then(response => {
-          {
             setModalVisibleCheck(true);
             setModalCheck({
               Title: 'Sucesso',
               Message: 'Impressora cadastrada com sucesso',
             });
-          }
         })
         .catch(error => {
           setModalVisibleError(true);
@@ -152,24 +145,13 @@ export function Printers() {
                   source={require('../../assets/icons/voltar.png')}
                   style={{maxWidth: 15, height: 15}}
                 />
-                <Text
-                  style={{
-                    color: '#2974B4',
-                    marginLeft: 5,
-                    fontWeight: '700',
-                    fontSize: 18,
-                  }}>
+                <Text style={Styles.backButton}>
                   Voltar
                 </Text>
               </View>
             </TouchableOpacity>
             <Text
-              style={{
-                color: '#000000',
-                fontWeight: '700',
-                fontSize: 18,
-                marginLeft: '15%',
-              }}>
+              style={Styles.printButton}>
               Impressoras
             </Text>
           </View>

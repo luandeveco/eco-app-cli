@@ -1,11 +1,23 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const Styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     width: '100%',
     height: '100%',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  backButton:{
+    color: '#2974B4',
+    marginLeft: 5,
+    fontWeight: '700',
+    fontSize: 18,
+  },
+  printButton:{
+    color: '#000000',
+    fontWeight: '700',
+    fontSize: 18,
+    marginLeft: '15%',
   },
   text: {
     color: '#FFFFFF',
@@ -39,7 +51,7 @@ export const Styles = StyleSheet.create({
     borderWidth: 1,
   },
   Container: {
-    paddingHorizontal: "5%"
+    paddingHorizontal: '5%',
 
   },
   button:{
@@ -79,7 +91,7 @@ export const Styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingTop: '5%',
-    paddingHorizontal: '5%'
+    paddingHorizontal: '5%',
   },
   Printer: {
     width: '100%',
@@ -89,7 +101,7 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: '10%',
     paddingVertical: '3%',
-    marginBottom: '3%'
+    marginBottom: '3%',
   },
   PrinterError: {
     width: '100%',
@@ -97,7 +109,7 @@ export const Styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 8,
     paddingHorizontal: '5%',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   BackgroundClose: {
     //flex:1,
@@ -105,7 +117,7 @@ export const Styles = StyleSheet.create({
   },
   buttonPrinter: {
     backgroundColor: '#FFFFFF',
-    padding: "3%",
+    padding: '3%',
     marginLeft: '5%',
     marginBottom: '2%',
     borderBottomWidth: 1,
