@@ -10,7 +10,7 @@ module.exports = {
         },
       },
     ],
-    'react-native-reanimated/plugin',
+    //'react-native-reanimated/plugin',
     'babel-plugin-transform-typescript-metadata',
   ],
 };

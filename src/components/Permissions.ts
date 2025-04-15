@@ -10,8 +10,7 @@ export const requestLocationPermission = async (): Promise<{
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
         title: 'Permissão de localização do aplicativo',
-        message:
-          'O aplicativo precisa de acesso à sua localização para um melhor funcionamento',
+        message:'O aplicativo precisa de acesso à sua localização para um melhor funcionamento',
         buttonNeutral: 'Pergunte-me mais tarde',
         buttonNegative: 'Cancelar',
         buttonPositive: 'Permitir',
