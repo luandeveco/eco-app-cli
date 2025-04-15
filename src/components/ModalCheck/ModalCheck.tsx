@@ -4,7 +4,7 @@ import {
   Image,
   Modal,
   Text,
-  TouchableOpacity,
+  Pressable,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -33,9 +33,9 @@ export const ModalCheck = ({Title, Message, status, onClose}) => {
               <Text style={Styles.textColorTitle}>{Title}</Text>
               <Text style={Styles.textColorMessage}>{Message}</Text>
               <Image source={require('../../assets/icons/check.png')} style={{width: 80, height: 80, marginBottom: "4%"}}/>
-              <TouchableOpacity style={Styles.button} onPress={handleClose}>
+              <Pressable style={({pressed}) => [Styles.button, {opacity : pressed ? 0.6 : 1}]} onPress={handleClose}>
                 <Text style={Styles.buttonText}>Entendido</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </TouchableWithoutFeedback>

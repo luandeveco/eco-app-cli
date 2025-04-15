@@ -50,4 +50,23 @@ export const Styles = StyleSheet.create({
     fontSize: 18,
     justifyContent: 'center'
   },
+  containerSetAparencia:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#e2e2e2',
+    borderWidth: 1,
+    borderRadius: 5,
+    width: '30%',
+    height: '90%',
+    justifyContent:'space-between'
+  },
+  setPress: {
+    backgroundColor: '#e2e2e2',
+    width: '30%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5
+  },
 });

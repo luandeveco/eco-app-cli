@@ -3,13 +3,13 @@ import {
   ImageBackground,
   StatusBar,
   Text,
-  TouchableOpacity,
   View,
   Image,
   FlatList,
   Modal,
   TouchableWithoutFeedback,
   ToastAndroid,
+  Pressable,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {BLEPrinter, IBLEPrinter} from 'react-native-thermal-receipt-printer';
@@ -137,8 +137,8 @@ export function Printers() {
         <View style={Styles.Container}>
           {/** Cabeçalho da tela: Botão de voltar e título */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <TouchableOpacity
-              style={Styles.LineContainer}
+            <Pressable
+              style={({pressed}) => [Styles.LineContainer, {opacity: pressed ? 0.6 : 1}]}
               onPress={handleReturn}>
               <View style={Styles.button}>
                 <Image
@@ -149,7 +149,7 @@ export function Printers() {
                   Voltar
                 </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
             <Text
               style={Styles.printButton}>
               Impressoras
@@ -159,18 +159,18 @@ export function Printers() {
         {/** Botão de ação */}
         <View style={{marginRight: '5%'}}>
           <View style={{marginVertical: '4%', alignItems: 'flex-end'}}>
-            <TouchableOpacity
-              style={Styles.LineContainerButton}
+            <Pressable
+              style={({pressed}) => [Styles.LineContainerButton, {opacity: pressed ? 0.6 : 1}]}
               onPress={() => setModal(true)}>
               <Text style={Styles.text}>Cadastrar</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <FlatList
             style={{width: '100%', height: '70%'}}
             data={registeredPrinters}
             renderItem={({item}) => (
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   backgroundColor: '#FFFFFF',
                   padding: '3%',
                   marginLeft: '5%',
@@ -180,7 +180,7 @@ export function Printers() {
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                }}
+                }, {opacity: pressed ? 0.6 : 1}]}
                 onPress={() => {
                   setModalAction(true), setIdPrint(item.id);
                 }}>
@@ -214,7 +214,7 @@ export function Printers() {
                     style={{maxWidth: 15, height: 15, alignItems: 'center'}}
                   />
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             )}
           />
         </View>
@@ -254,9 +254,8 @@ export function Printers() {
                     <>
                       {data.item.device_name ||
                       data.item.inner_mac_address != null ? (
-                        <TouchableOpacity
-                          style={Styles.Printer}
-                          activeOpacity={0.9}
+                        <Pressable
+                          style={({pressed}) => [Styles.Printer, {opacity: pressed ? 0.6 : 1}]}
                           onPress={() => {
                             Print(
                               data.item.inner_mac_address,
@@ -270,11 +269,10 @@ export function Printers() {
                           <Text style={{color: '#FFFFFF', fontWeight: '700'}}>
                             {data.item.inner_mac_address}
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       ) : (
-                        <TouchableOpacity
-                          style={Styles.Printer}
-                          activeOpacity={0.9}
+                        <Pressable
+                          style={({pressed}) => [Styles.Printer, {opacity: pressed ? 0.6 : 1}]}
                           onPress={() => setModal(false)}>
                           <Text
                             style={{
@@ -292,7 +290,7 @@ export function Printers() {
                             }}>
                             Vincule sua impressora ao celular via Bluetooth.
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       )}
                     </>
                   )}
@@ -327,15 +325,15 @@ export function Printers() {
                     justifyContent: 'space-between',
                     width: '100%',
                   }}>
-                  <TouchableOpacity
+                  <Pressable
                     onPress={() => {
                       PrintOutExclusion(idPrint);
                     }}
-                    style={{
+                    style={({pressed}) => [{
                       ...Styles.buttonAction,
                       borderColor: '#df0000',
                       borderWidth: 1,
-                    }}>
+                    }, {opacity: pressed ? 0.6 : 1}]}>
                     <Text
                       style={{
                         color: '#df0000',
@@ -344,16 +342,16 @@ export function Printers() {
                       }}>
                       Excluir
                     </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
+                  </Pressable>
+                  <Pressable
                     onPress={() => {
                       PrintOutTest(idPrint);
                     }}
-                    style={{
+                    style={({pressed}) => [{
                       ...Styles.buttonAction,
                       borderColor: '#2974b4',
                       borderWidth: 1,
-                    }}>
+                    }, {opacity : pressed ? 0.6 : 1}]}>
                     <Text
                       style={{
                         color: '#2974b4',
@@ -362,7 +360,7 @@ export function Printers() {
                       }}>
                       Testar Impressora
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               </View>
             </View>

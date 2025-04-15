@@ -8,7 +8,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
   BackHandler,
   FlatList,
@@ -1691,14 +1691,13 @@ export function Relatory() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{alignItems: 'center'}}>
         <BackButton onPress={handleReturn} />
-        <TouchableOpacity
-          style={Styles.ButtonTitle}
-          activeOpacity={0.75}
+        <Pressable
+          style={({pressed}) => [Styles.ButtonTitle, {opacity : pressed ? 0.6 : 1}]}
           onPress={() => {
             setRelatory(true);
           }}>
           <Text style={Styles.TitleButton}>Imprimir Relatório</Text>
-        </TouchableOpacity>
+        </Pressable>
         {/*Recibos Pendentes*/}
         <View style={[Styles.StatusCard, {marginTop: '7%'}]}>
           <View style={Styles.Caption}>
@@ -2060,14 +2059,13 @@ export function Relatory() {
             {totalMoney.totalReceived} ({qtdReceived.total})
           </Text>
         </View>
-        <TouchableOpacity
-          style={Styles.DownReturnButton}
-          activeOpacity={0.75}
+        <Pressable
+          style={({pressed}) => [Styles.DownReturnButton, {opacity : pressed ? 0.6 : 1}]}
           onPress={() => {
             openModal();
           }}>
           <Text style={Styles.TextDownReturnButton}>Finalizar Movimento</Text>
-        </TouchableOpacity>
+        </Pressable>
       </ScrollView>
       <ModalError
         Title={modalError.Title}
@@ -2110,8 +2108,8 @@ export function Relatory() {
                     justifyContent: 'space-between',
                     width: '100%',
                   }}>
-                  <TouchableOpacity
-                    style={{
+                  <Pressable
+                    style={({pressed}) => [{
                       backgroundColor: '#2974B4',
                       padding: 10,
                       borderRadius: 15,
@@ -2121,7 +2119,7 @@ export function Relatory() {
                       justifyContent: 'center',
                       alignItems: 'center',
                       paddingVertical: '15%',
-                    }}
+                    },{opacity : pressed ? 0.6 : 1}]}
                     onPress={() => {
                       setModalVisible(false);
                       reportFinalizeMovement(false);
@@ -2133,9 +2131,9 @@ export function Relatory() {
                     <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                       Finalizar
                     </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
+                  </Pressable>
+                  <Pressable
+                    style={({pressed}) => [{
                       backgroundColor: '#2974B4',
                       padding: 10,
                       borderRadius: 15,
@@ -2145,7 +2143,7 @@ export function Relatory() {
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginBottom: 10,
-                    }}
+                    }, {opacity : pressed ? 0.6 : 1}]}
                     onPress={() => {
                       sendWhatsapp()
                     }}>
@@ -2156,7 +2154,7 @@ export function Relatory() {
                     <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                       Enviar pelo Whatsapp
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
             </View>
           </View>
@@ -2200,9 +2198,8 @@ export function Relatory() {
                     {/** Listagem de impressoras */}
                     {data.item.device_name ||
                     data.item.inner_mac_address != null ? (
-                      <TouchableOpacity
-                        style={Styles.Printer}
-                        activeOpacity={0.9}
+                      <Pressable
+                        style={({pressed}) => [Styles.Printer, {opacity : pressed ? 0.6 : 1}]}
                         onPress={() => {
                           printOut(data.item.inner_mac_address, text);
                           setLoading(true);
@@ -2213,11 +2210,10 @@ export function Relatory() {
                         <Text style={{color: '#FFFFFF', fontWeight: '700'}}>
                           {data.item.inner_mac_address}
                         </Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     ) : (
-                      <TouchableOpacity
-                        style={Styles.Printer}
-                        activeOpacity={0.9}
+                      <Pressable
+                        style={({pressed}) => [Styles.Printer, {opacity : pressed ? 0.6 : 1}]}
                         onPress={() => setVisibleModalPrinterSelect(false)}>
                         <Text
                           style={{
@@ -2235,7 +2231,7 @@ export function Relatory() {
                           }}>
                           Vincule sua impressora ao celular via Bluetooth.
                         </Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     )}
                   </>
                 )}
@@ -2295,8 +2291,8 @@ export function Relatory() {
                 {relatoryState == false ? (
                   <>
                     {/**Relatório Resumido */}
-                    <TouchableOpacity
-                      style={{
+                    <Pressable
+                      style={({pressed}) => [{
                         backgroundColor: '#2974B4',
                         padding: 10,
                         borderRadius: 15,
@@ -2305,7 +2301,7 @@ export function Relatory() {
                         alignContent: 'center',
                         justifyContent: 'space-evenly',
                         alignItems: 'center',
-                      }}
+                      }, {opacity : pressed ? 0.6 : 1}]}
                       onPress={() => {
                         setRelatoryState(true);
                       }}>
@@ -2317,10 +2313,10 @@ export function Relatory() {
                       <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                         Resumido
                       </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                     {/**Relatório Detalhado */}
-                    <TouchableOpacity
-                      style={{
+                    <Pressable
+                      style={({pressed}) => [{
                         backgroundColor: '#2974B4',
                         padding: 10,
                         borderRadius: 15,
@@ -2330,7 +2326,7 @@ export function Relatory() {
                         justifyContent: 'space-evenly',
                         alignItems: 'center',
                         marginBottom: 10,
-                      }}
+                      },{opacity : pressed ? 0.6 : 1}]}
                       onPress={() => {
                         setRelatoryState(true);
                         setRelatoryStateDetail(true);
@@ -2343,15 +2339,15 @@ export function Relatory() {
                       <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                         Detalhado
                       </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                   </>
                 ) : (
                   <>
                     {relatoryStateDetail ? (
                       <>
                         {/**Relatório detalhado Local */}
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2361,7 +2357,7 @@ export function Relatory() {
                             justifyContent: 'space-evenly',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setRelatory(false);
                             setRelatoryState(false);
@@ -2377,10 +2373,10 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Local
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                         {/**Relatório detalhado Servidor */}
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2390,7 +2386,7 @@ export function Relatory() {
                             justifyContent: 'space-evenly',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setRelatory(false);
                             setRelatoryState(false);
@@ -2405,13 +2401,13 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Sistema
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </>
                     ) : (
                       <>
                         {/**Relatório resumido Local */}
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2421,7 +2417,7 @@ export function Relatory() {
                             justifyContent: 'space-evenly',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setRelatory(false);
                             setRelatorySummarized(true);
@@ -2437,10 +2433,10 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Local
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                         {/**Relatório resumido Servidor */}
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2450,7 +2446,7 @@ export function Relatory() {
                             justifyContent: 'space-evenly',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setSummarizedReportOptions(true);
                           }}>
@@ -2462,7 +2458,7 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Sistema
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </>
                     )}
                   </>
@@ -2533,8 +2529,8 @@ export function Relatory() {
                           justifyContent: 'space-between',
                           width: '100%',
                         }}>
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2544,7 +2540,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingVertical: '15%',
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             reportFinalizeMovement(true);
                           }}>
@@ -2559,9 +2555,9 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Imprimir
                           </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={{
+                        </Pressable>
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             paddingVertical: 10,
                             paddingHorizontal: 5,
@@ -2572,7 +2568,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             sendWhatsappSummarizedLocal();
                           }}>
@@ -2593,7 +2589,7 @@ export function Relatory() {
                             }}>
                             Enviar pelo Whatsapp
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </View>
                     </>
                   ) : (
@@ -2604,8 +2600,8 @@ export function Relatory() {
                           justifyContent: 'space-between',
                           width: '100%',
                         }}>
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2615,7 +2611,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingVertical: '15%',
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => reportMovimentSummarizedServer()}>
                           <Image
                             resizeMode="contain"
@@ -2629,9 +2625,9 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Imprimir
                           </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={{
+                        </Pressable>
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2641,7 +2637,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             sendWhatsappummarizedSever();
                           }}>
@@ -2657,7 +2653,7 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Enviar pelo Whatsapp
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </View>
                     </>
                   )}
@@ -2728,8 +2724,8 @@ export function Relatory() {
                           justifyContent: 'space-between',
                           width: '100%',
                         }}>
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2739,7 +2735,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingVertical: '15%',
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setDetailReportOptions(false);
                             setDetailReport(true);
@@ -2756,9 +2752,9 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Imprimir
                           </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={{
+                        </Pressable>
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             paddingVertical: 10,
                             paddingHorizontal: 5,
@@ -2769,7 +2765,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          }, {opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             sendWhatsappDetailLocal();
                           }}>
@@ -2790,7 +2786,7 @@ export function Relatory() {
                             }}>
                             Enviar pelo Whatsapp
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </View>
                     </>
                   ) : (
@@ -2801,8 +2797,8 @@ export function Relatory() {
                           justifyContent: 'space-between',
                           width: '100%',
                         }}>
-                        <TouchableOpacity
-                          style={{
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2812,7 +2808,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingVertical: '15%',
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             setDetailReportOptions(false);
                             setDetailReportOptionsLocal(false);
@@ -2831,9 +2827,9 @@ export function Relatory() {
                           <Text style={{color: '#FFFFFF', fontWeight: '500'}}>
                             Imprimir
                           </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={{
+                        </Pressable>
+                        <Pressable
+                          style={({pressed}) => [{
                             backgroundColor: '#2974B4',
                             padding: 10,
                             borderRadius: 15,
@@ -2843,7 +2839,7 @@ export function Relatory() {
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginBottom: 10,
-                          }}
+                          },{opacity : pressed ? 0.6 : 1}]}
                           onPress={() => {
                             sendWhatsappDetailSever();
                           }}>
@@ -2864,7 +2860,7 @@ export function Relatory() {
                             }}>
                             Enviar pelo Whatsapp
                           </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                       </View>
                     </>
                   )}

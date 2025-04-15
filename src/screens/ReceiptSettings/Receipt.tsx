@@ -2,7 +2,7 @@ import {
   StatusBar,
   ImageBackground,
   View,
-  TouchableOpacity,
+  Pressable,
   Image,
   Text,
   Animated,
@@ -210,8 +210,8 @@ export function ReceiptSettings() {
           <View style={Styles.Container}>
             {/** Cabeçalho da tela: Botão de voltar e título */}
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <TouchableOpacity
-                style={Styles.LineContainer}
+              <Pressable
+                style={({pressed}) => [Styles.LineContainer, {opacity : pressed ? 0.6 : 1}]}
                 onPress={handleReturn}>
                 <View style={Styles.button}>
                   <Image
@@ -228,7 +228,7 @@ export function ReceiptSettings() {
                     Voltar
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </Pressable>
               <Text
                 style={{
                   color: '#000000',
@@ -263,14 +263,13 @@ export function ReceiptSettings() {
                 </Text>
               </View>
               <View style={Styles.ContainerSwitch}>
-                <TouchableOpacity
-                  style={[
+                <Pressable
+                  style={({pressed}) => [
                     Styles.Outter,
                     isOn
                       ? {backgroundColor: '#5dd55d'}
                       : {backgroundColor: '#bdbebd'},
-                  ]}
-                  activeOpacity={0.9}
+                  {opacity : pressed ? 0.6 : 1}]}
                   onPress={toggleSwich}>
                   <Animated.View
                     style={[
@@ -278,7 +277,7 @@ export function ReceiptSettings() {
                       {transform: [{translateX: switchTranslate}]},
                     ]}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           </View>
@@ -311,14 +310,13 @@ export function ReceiptSettings() {
                     </Text>
                   </View>
                   <View style={Styles.ContainerSwitch}>
-                    <TouchableOpacity
-                      style={[
+                    <Pressable
+                      style={({pressed}) => [
                         Styles.Outter,
                         assemblyNew
                           ? {backgroundColor: '#5dd55d'}
                           : {backgroundColor: '#bdbebd'},
-                      ]}
-                      activeOpacity={0.9}
+                      {opacity : pressed ? 0.6 : 1}]}
                       onPress={toggleSwitchNew}>
                       <Animated.View
                         style={[
@@ -326,7 +324,7 @@ export function ReceiptSettings() {
                           {transform: [{translateX: switchTranslateAssemblyNew}]},
                         ]}
                       />
-                    </TouchableOpacity>
+                    </Pressable>
                   </View>
                 </View>
               </View>
@@ -352,14 +350,14 @@ export function ReceiptSettings() {
                     </Text>
                   </View>
                   <View style={Styles.ContainerSwitch}>
-                    <TouchableOpacity
-                      style={[
+                    <Pressable
+                      style={({pressed}) => [
                         Styles.Outter,
                         assemblyOld
                           ? {backgroundColor: '#5dd55d'}
                           : {backgroundColor: '#bdbebd'},
+                          {opacity : pressed ? 0.6 : 1}
                       ]}
-                      activeOpacity={0.9}
                       onPress={toggleSwitchOld}>
                       <Animated.View
                         style={[
@@ -367,7 +365,7 @@ export function ReceiptSettings() {
                           {transform: [{translateX: switchTranslateAssemblyOld}]},
                         ]}
                       />
-                    </TouchableOpacity>
+                    </Pressable>
                   </View>
                 </View>
               </View>

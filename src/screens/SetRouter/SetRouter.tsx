@@ -1,7 +1,7 @@
 import {
   StatusBar,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   ActivityIndicator,
   ImageBackground,
@@ -717,8 +717,7 @@ function SetRoute(route) {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity
-        activeOpacity={0.9}
+      <Pressable
         onPress={() =>
           isEnabled == false
             ? block == false
@@ -726,7 +725,7 @@ function SetRoute(route) {
               : handleReceipt(item.numero_recibo, item.cod_tipo_pagamento)
             : saveRoute(item.numero_recibo)
         }
-        style={[
+        style={({pressed}) => [
           Styles.CardReceipt,
           isEnabled == false
             ? {backgroundColor: '#fff'}
@@ -734,6 +733,7 @@ function SetRoute(route) {
                 backgroundColor:
                   selectedId == item.numero_recibo ? '#fff' : '#fbfbfb86',
               },
+              {opacity : pressed ? 0.6 : 1}
         ]}>
         <View>
           {/**Cabeçalho do recibo */}
@@ -816,14 +816,13 @@ function SetRoute(route) {
             {item?.ultima_visita == null ? '' : formatDate(item?.ultima_visita)}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   const renderItemAbridged = ({item}) => {
     return (
-      <TouchableOpacity
-        activeOpacity={0.9}
+      <Pressable
         onPress={() =>
           isEnabled == false
             ? block == false
@@ -831,7 +830,7 @@ function SetRoute(route) {
               : handleReceipt(item.numero_recibo, item.cod_tipo_pagamento)
             : saveRoute(item.numero_recibo)
         }
-        style={[
+        style={({pressed}) => [
           Styles.CardReceipt,
           isEnabled == false
             ? {backgroundColor: '#fff'}
@@ -839,6 +838,7 @@ function SetRoute(route) {
                 backgroundColor:
                   selectedId == item.numero_recibo ? '#fff' : '#fbfbfb86',
               },
+            {opacity : pressed ? 0.6 : 1}
         ]}>
         <View>
           {/**Cabeçalho do recibo */}
@@ -911,7 +911,7 @@ function SetRoute(route) {
             </Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -945,8 +945,8 @@ function SetRoute(route) {
           Styles.FilterBox,
           filterOpen == true ? {height: height * 0.38} : {},
         ]}>
-        <TouchableOpacity
-          style={Styles.FilterLine}
+        <Pressable
+          style={({pressed}) => [Styles.FilterLine, {opacity : pressed ? 0.6 : 1}]}
           onPress={() => setFilterOpen(filterOpen == true ? false : true)}>
           <MaterialIcons
             name={filterOpen == true ? 'expand-more' : 'chevron-right'}
@@ -954,7 +954,7 @@ function SetRoute(route) {
             color="#2974B4"
           />
           <Text style={Styles.TextFilter}>FILTRAR</Text>
-        </TouchableOpacity>
+        </Pressable>
         {filterOpen == true ? (
           <View
             style={{
@@ -964,16 +964,16 @@ function SetRoute(route) {
               marginTop: '2%',
               marginRight: '5%',
             }}>
-            <TouchableOpacity
+            <Pressable
               onPress={cleanFilter}
-              style={{
+              style={({pressed}) => [{
                 backgroundColor: '#2974B4',
                 borderRadius: 8,
                 width: '100%',
                 height: '100%',
                 alignItems: 'center',
                 justifyContent: 'center',
-              }}>
+              },{opacity : pressed ? 0.6 : 1}]}>
               <View style={{flexDirection: 'row'}}>
                 <Image
                   source={require('../../assets/iconsWhite/Clean3x.png')}
@@ -984,7 +984,7 @@ function SetRoute(route) {
                   Limpar Filtro
                 </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         ) : (
           ''

@@ -3,7 +3,7 @@ import {
   Image,
   StatusBar,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   ImageBackground,
   KeyboardAvoidingView,
@@ -139,8 +139,8 @@ function Login() {
                 secureTextEntry={!isPasswordVisible}
                 cursorColor={'#ffffff'}
               />
-              <TouchableOpacity
-                style={Styles.showPasswordButton}
+              <Pressable
+                style={({pressed}) => [Styles.showPasswordButton, {opacity: pressed ? 0.6 : 1}]}
                 onPress={togglePasswordVisibility}>
                 <Image
                   source={
@@ -150,14 +150,14 @@ function Login() {
                   }
                   style={Styles.eyeIcon}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
-          <TouchableOpacity
-            style={Styles.boxButton}
+          <Pressable
+            style={({pressed}) => [Styles.boxButton, {opacity:pressed? 0.6 : 1}]}
             onPress={() => handleLogin()}>
             <Text style={Styles.textBotton}>Entrar</Text>
-          </TouchableOpacity>
+          </Pressable>
           <View style={Styles.containerVersion}>
             <Text style={Styles.versionText}>V {versionName}</Text>
           </View>

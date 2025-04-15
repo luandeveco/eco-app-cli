@@ -3,7 +3,7 @@ import {
   ImageBackground,
   StatusBar,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   Image,
   useColorScheme
@@ -73,8 +73,8 @@ export function Appearance() {
               alignItems: 'center',
               marginTop: '15%',
             }}>
-            <TouchableOpacity
-              style={Styles.LineContainer}
+            <Pressable
+              style={({pressed}) => [Styles.LineContainer, {opacity: pressed ? 0.6 : 1}]}
               onPress={handleReturn}>
               <View style={Styles.button}>
                 <Image
@@ -91,7 +91,7 @@ export function Appearance() {
                   Voltar
                 </Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
             <Text
               style={{
                 color: '#000000',
@@ -113,14 +113,14 @@ export function Appearance() {
               height: '25%'
             }}>
             <Text style={Styles.text}>Tela de Recibo</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center', borderColor: '#e2e2e2', borderWidth: 1, borderRadius: 5, width: '30%', height: '90%', justifyContent: 'space-between'}}>
-              <TouchableOpacity onPress={decreaseFontSize} style={{backgroundColor: '#e2e2e2', width: '30%', height: '100%',alignItems: 'center', justifyContent: 'center' ,borderTopLeftRadius: 5, borderBottomLeftRadius: 5}}>
+            <View style={Styles.containerSetAparencia}>
+              <Pressable onPress={decreaseFontSize} style={({pressed}) => [Styles.setPress, {opacity: pressed ? 0.6 : 1}]}>
                 <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 24}}>-</Text>
-              </TouchableOpacity>
+              </Pressable>
               <Text style={{color: '#000000', fontWeight: '700'}}>{fontSize}</Text>
-              <TouchableOpacity onPress={increaseFontSize} style={{backgroundColor: '#e2e2e2', width: '30%', height: '100%',alignItems: 'center', justifyContent: 'center' ,borderTopRightRadius: 5, borderBottomRightRadius: 5}}>
+              <Pressable onPress={increaseFontSize} style={({pressed}) => [Styles.setPress, {opacity: pressed ? 0.6 : 1}]}>
                 <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 18}}>+</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </View>

@@ -3,7 +3,7 @@ import {
   ImageBackground,
   StatusBar,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   Image,
   ScrollView,
@@ -68,8 +68,8 @@ export function Setting() {
           <View style={Styles.Container}>
             {/** Cabeçalho da tela: Botão de voltar e título */}
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <TouchableOpacity
-                style={Styles.LineContainer}
+              <Pressable
+                style={({pressed}) => [Styles.LineContainer, {opacity : pressed ? 0.6 : 1}]}
                 onPress={handleReturn}>
                 <View style={Styles.button}>
                   <Image
@@ -86,7 +86,7 @@ export function Setting() {
                     Voltar
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </Pressable>
               <Text
                 style={{
                   color: '#000000',
@@ -100,15 +100,15 @@ export function Setting() {
             {/** Opções */}
             {/** Opção da impressora */}
             <View>
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: '8%',
                   borderBottomWidth: 1,
                   paddingVertical: '5%',
                   justifyContent: 'space-between',
-                }}
+                },{opacity : pressed ? 0.6 : 1}]}
                 onPress={handlePrintes}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -131,19 +131,19 @@ export function Setting() {
                     style={{maxWidth: 15, height: 15, alignItems: 'center'}}
                   />
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {/** Opção do Relatório */}
             <View>
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: '2%',
                   borderBottomWidth: 1,
                   paddingVertical: '5%',
                   justifyContent: 'space-between',
-                }}
+                },{opacity : pressed ? 0.6 : 1}]}
                 onPress={handleReceipt}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -166,19 +166,19 @@ export function Setting() {
                     style={{maxWidth: 15, height: 15, alignItems: 'center'}}
                   />
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {/** Opção do Aparência */}
             <View>
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: '2%',
                   borderBottomWidth: 1,
                   paddingVertical: '5%',
                   justifyContent: 'space-between',
-                }}
+                },{opacity : pressed ? 0.6 : 1}]}
                 onPress={handleAppearance}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -201,19 +201,19 @@ export function Setting() {
                     style={{maxWidth: 15, height: 15, alignItems: 'center'}}
                   />
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {/** Suporte */}
             <View>
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: '2%',
                   borderBottomWidth: 1,
                   paddingVertical: '5%',
                   justifyContent: 'space-between',
-                }}
+                },{opacity : pressed ? 0.6 : 1}]}
                 onPress={modalRedirect}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <SimpleLineIcons name="support" color="#2974B4" size={22} />
@@ -227,19 +227,19 @@ export function Setting() {
                     Suporte
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             {/** Logout */}
             <View>
-              <TouchableOpacity
-                style={{
+              <Pressable
+                style={({pressed}) => [{
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginTop: '2%',
                   borderBottomWidth: 1,
                   paddingVertical: '5%',
                   justifyContent: 'space-between',
-                }}
+                },{opacity : pressed ? 0.6 : 1}]}
                 onPress={signOut}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <SimpleLineIcons name="logout" color="#B42929" size={22} />
@@ -253,7 +253,7 @@ export function Setting() {
                     Logout
                   </Text>
                 </View>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </ScrollView>
@@ -265,16 +265,16 @@ export function Setting() {
                 Você será direcionado para o Whatsapp
               </Text>
               <View style={Styles.buttonOptions}>
-                <TouchableOpacity
-                  style={Styles.ButtonOptionsWhatsapp}
+                <Pressable
+                  style={({pressed}) => [Styles.ButtonOptionsWhatsapp, {opacity : pressed ? 0.6 : 1}]}
                   onPress={RedirectWhatsapp}>
                   <Text style={Styles.textButtonModel}>Falar com suporte</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={Styles.ButtonOptionscancel}
+                </Pressable>
+                <Pressable
+                  style={({pressed}) => [Styles.ButtonOptionscancel,{opacity : pressed ? 0.6 : 1}]}
                   onPress={() => setContactSupport(false)}>
                   <Text style={Styles.textButtonModel}>Cancelar</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           </View>

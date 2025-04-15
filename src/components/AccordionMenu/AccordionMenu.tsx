@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import Styles from './Styles';
 
 const AccordionMenu = ({ title, children }) => {
@@ -7,9 +7,9 @@ const AccordionMenu = ({ title, children }) => {
 
   return (
     <View style={Styles.container}>
-      <TouchableOpacity style={Styles.header} onPress={() => setIsOpen(!isOpen)}>
+      <Pressable style={({pressed}) => [Styles.header, {opacity : pressed ? 0.6 : 1}]} onPress={() => setIsOpen(!isOpen)}>
         <Text style={Styles.title}>{title}</Text>
-      </TouchableOpacity>
+      </Pressable>
       {isOpen && <View>{children}</View>}
     </View>
   );

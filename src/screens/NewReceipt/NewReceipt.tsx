@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
   ToastAndroid,
-  TouchableOpacity,
+  Pressable,
   TouchableWithoutFeedback,
   Vibration,
   View,
@@ -731,8 +731,8 @@ function NewReceipt({navigation, route}) {
         <BackButton onPress={handleReturn} />
         <View style={Styles.ButtonDownView}>
           {checkLocation === true ? (
-            <TouchableOpacity
-              style={{
+            <Pressable
+              style={({pressed}) => [{
                 backgroundColor: receipt?.status != 0 ? '#bebebe' : '#fff',
                 borderColor: receipt?.status != 0 ? '#bebebe' : '#fff',
                 marginBottom: '1%',
@@ -742,7 +742,7 @@ function NewReceipt({navigation, route}) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 5,
-              }}
+              }, {opacity: pressed ? 0.6 : 1}]}
               disabled={
                 block == true ? true : receipt?.status != 0 ? true : false
               }
@@ -750,10 +750,10 @@ function NewReceipt({navigation, route}) {
               <Text style={{color: '#000000', fontWeight: '700'}}>
                 Baixar Recebido
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           ) : (
-            <TouchableOpacity
-              style={{
+            <Pressable
+              style={({pressed}) => [{
                 backgroundColor: receipt?.status != 0 ? '#bebebe' : '#fff',
                 borderColor: receipt?.status != 0 ? '#bebebe' : '#fff',
                 marginBottom: '1%',
@@ -763,7 +763,7 @@ function NewReceipt({navigation, route}) {
                 borderWidth: 1,
                 padding: 10,
                 borderRadius: 5,
-              }}
+              },{opacity: pressed ? 0.6 : 1}]}
               disabled={
                 block == true ? true : receipt?.status != 0 ? true : false
               }
@@ -773,7 +773,7 @@ function NewReceipt({navigation, route}) {
               <Text style={{color: '#000000', fontWeight: '700'}}>
                 Baixar Recebido
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
         {/*Inicio do recibo*/}
@@ -879,30 +879,30 @@ function NewReceipt({navigation, route}) {
           {/**Informações do contribuinte*/}
           <View style={Styles.receiptInformation}>
             <Text style={Styles.titleText}>CONTRIBUINTE</Text>
-            <TouchableOpacity onPress={checkCPF}>
+            <Pressable onPress={checkCPF}>
               <Text style={[Styles.receiptInformationData, {fontSize}]}>
                 {receipt?.cod_contribuinte} -{' '}
                 {formatName(receipt?.nome_contribuinte)}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
             <Text style={Styles.titleText}>CONTATO</Text>
             {[receipt?.telefone1, receipt?.telefone2, receipt?.telefone3].map(
               (telefone, index) => (
                 <View key={index} style={Styles.Cell}>
                   {telefone && (
                     <>
-                      <TouchableOpacity
-                        style={Styles.ButtonCall}
+                      <Pressable
+                        style={({pressed}) => [Styles.ButtonCall, {opacity: pressed ? 0.6 : 1}]}
                         onPress={() => callNumber(telefone)}>
                         <Text style={[Styles.TextData, {fontSize}]}>
                           {formatPhoneNumber(telefone)}
                         </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={Styles.ButtonCall}
+                      </Pressable>
+                      <Pressable
+                        style={({pressed}) => [Styles.ButtonCall, {opacity: pressed ? 0.6 : 1}]}
                         onPress={() => sendAlertWhatsapp(telefone)}>
                         <Icon name="whatsapp" size={25} color="#000000" />
-                      </TouchableOpacity>
+                      </Pressable>
                     </>
                   )}
                 </View>
@@ -937,14 +937,14 @@ function NewReceipt({navigation, route}) {
                     setUpdatePhone(text);
                   }}
                 />
-                <TouchableOpacity
-                  style={{
+                <Pressable
+                  style={({pressed}) => [{
                     backgroundColor: '#2974b4',
                     marginVertical: '2%',
                     width: '100%',
                     padding: '5%',
                     borderRadius: 8,
-                  }}
+                  },{opacity: pressed ? 0.6 : 1}]}
                   onPress={() => savePhone()}>
                   <Text
                     style={{
@@ -954,7 +954,7 @@ function NewReceipt({navigation, route}) {
                     }}>
                     Salvar Número
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </>
             ) : (
               ''
@@ -1064,14 +1064,14 @@ function NewReceipt({navigation, route}) {
               onChangeText={text => setTextTaxpayer(text)}
               value={textTaxpayer}
             />
-            <TouchableOpacity
-              style={{
+            <Pressable
+              style={({pressed}) => [{
                 backgroundColor: '#2974b4',
                 marginVertical: '2%',
                 width: '100%',
                 padding: '5%',
                 borderRadius: 8,
-              }}
+              }, {opacity: pressed ? 0.6 : 1}]}
               onPress={() => saveText()}>
               <Text
                 style={{
@@ -1081,11 +1081,11 @@ function NewReceipt({navigation, route}) {
                 }}>
                 ENVIAR OBSERVAÇÃO
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
-        <TouchableOpacity
-          style={{
+        <Pressable
+          style={({pressed}) => [{
             backgroundColor: receipt?.status != 0 ? '#bebebe' : '#fff',
             borderColor: receipt?.status != 0 ? '#bebebe' : '#fff',
             marginVertical: '3%',
@@ -1095,7 +1095,7 @@ function NewReceipt({navigation, route}) {
             borderWidth: 1,
             padding: 10,
             borderRadius: 5,
-          }}
+          }, {opacity: pressed ? 0.6 : 1}]}
           disabled={block == true ? true : receipt?.status != 0 ? true : false}
           onPress={() => {
             downReturned();
@@ -1103,10 +1103,10 @@ function NewReceipt({navigation, route}) {
           <Text style={{color: '#000000', fontWeight: '700'}}>
             Baixar devolvido
           </Text>
-        </TouchableOpacity>
+        </Pressable>
         {receipt.status === 1 ? (
-          <TouchableOpacity
-            style={{
+          <Pressable
+            style={({pressed}) => [{
               backgroundColor: '#fff',
               borderColor: '#fff',
               marginVertical: '3%',
@@ -1116,19 +1116,19 @@ function NewReceipt({navigation, route}) {
               borderWidth: 1,
               padding: 10,
               borderRadius: 5,
-            }}
+            }, {opacity: pressed ? 0.6 : 1}]}
             onPress={() => {
               printReceipt();
             }}>
             <Text style={{color: '#000000', fontWeight: '700'}}>
               Imprimir novamente
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           ''
         )}
-        <TouchableOpacity
-          style={{
+        <Pressable
+          style={({pressed}) => [{
             backgroundColor: '#fff',
             borderColor: '#fff',
             marginBottom: '3%',
@@ -1138,12 +1138,12 @@ function NewReceipt({navigation, route}) {
             borderWidth: 1,
             padding: 10,
             borderRadius: 5,
-          }}
+          },{opacity: pressed ? 0.6 : 1}]}
           onPress={() => {
             setModalVisible(true);
           }}>
           <Text style={{color: '#000000', fontWeight: '700'}}>Aviso</Text>
-        </TouchableOpacity>
+        </Pressable>
         <Modal
           animationType="fade"
           transparent={true}
@@ -1189,13 +1189,13 @@ function NewReceipt({navigation, route}) {
                       {telefone && (
                         <>
                           <ScrollView showsVerticalScrollIndicator={false}>
-                            <TouchableOpacity
-                              style={Styles.ButtonCallModal}
+                            <Pressable
+                              style={({pressed}) => [Styles.ButtonCallModal, {opacity: pressed ? 0.6 : 1}]}
                               onPress={() => sendAlertWhatsapp(telefone)}>
                               <Text style={{color: '#ffffff'}}>
                                 {formatPhoneNumber(telefone)}
                               </Text>
-                            </TouchableOpacity>
+                            </Pressable>
                           </ScrollView>
                         </>
                       )}
@@ -1208,8 +1208,8 @@ function NewReceipt({navigation, route}) {
                       justifyContent: 'space-between',
                       width: '100%',
                     }}>
-                    <TouchableOpacity
-                      style={{
+                    <Pressable
+                      style={({pressed}) => [{
                         backgroundColor: '#2974B4',
                         padding: 10,
                         borderRadius: 15,
@@ -1218,7 +1218,7 @@ function NewReceipt({navigation, route}) {
                         justifyContent: 'center',
                         alignItems: 'center',
                         paddingVertical: '11%',
-                      }}
+                      }, {opacity: pressed ? 0.6 : 1}]}
                       onPress={() => {
                         setModalVisible(!false);
                         printNotice();
@@ -1234,9 +1234,9 @@ function NewReceipt({navigation, route}) {
                         }}>
                         Imprimir aviso
                       </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{
+                    </Pressable>
+                    <Pressable
+                      style={({pressed}) => [{
                         backgroundColor: '#2974B4',
                         padding: 10,
                         borderRadius: 15,
@@ -1244,7 +1244,7 @@ function NewReceipt({navigation, route}) {
                         alignContent: 'center',
                         justifyContent: 'center',
                         alignItems: 'center',
-                      }}
+                      }, {opacity: pressed ? 0.6 : 1}]}
                       onPress={() => setShowPhones(true)}>
                       <Image
                         source={require('../../assets/icons/whatsapp.png')}
@@ -1261,7 +1261,7 @@ function NewReceipt({navigation, route}) {
                         }}>
                         Enviar pelo Whatsapp
                       </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                   </View>
                 )}
               </View>
@@ -1294,7 +1294,7 @@ function NewReceipt({navigation, route}) {
                 justifyContent: 'center',
                 borderRadius: 16,
               }}>
-              <TouchableOpacity
+              <Pressable
                 onPress={() => setCpfCheck(false)}
                 style={{
                   alignSelf: 'flex-end',
@@ -1304,7 +1304,7 @@ function NewReceipt({navigation, route}) {
                   marginTop: '3.5%',
                 }}>
                 <IconAntDesign name="closecircleo" color="#FFFFFF" size={28} />
-              </TouchableOpacity>
+              </Pressable>
               <Text style={Styles.ModalCPFTitleText}>CPF DOS DOADORES</Text>
               <Text style={Styles.ModalCPFReceiptInformationData}>
                 Solicite ao doador o CPF
@@ -1413,7 +1413,7 @@ function NewReceipt({navigation, route}) {
               ) : (
                 ''
               )}
-              <TouchableOpacity
+              <Pressable
                 onPress={CPF}
                 style={{
                   backgroundColor: '#FFFFFF',
@@ -1435,7 +1435,7 @@ function NewReceipt({navigation, route}) {
                   }}>
                   Salvar
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </Modal>

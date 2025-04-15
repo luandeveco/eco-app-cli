@@ -2,7 +2,7 @@ import {
   Text,
   View,
   StatusBar,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   Image,
   ImageBackground,
@@ -794,15 +794,15 @@ export function Home() {
               </View>
               <Text style={Styles.textMensa}>Mensageiro</Text>
             </View>
-            <TouchableOpacity
+            <Pressable
               onPress={handleSettings}
-              style={Styles.Settingbutton}>
+              style={({pressed}) => [Styles.Settingbutton, {opacity: pressed ? 0.6 : 1}]}>
               <Image
                 style={{width: 25, height: 25, marginBottom: '5%'}}
                 source={require('../../assets/configuracoes-cog.png')}
                 alt="Icone da tela de configuração"
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <View style={Styles.styleContainer}>
             <View style={Styles.containerMen}>
@@ -904,10 +904,10 @@ export function Home() {
               style={Styles.inputText}
             />
           </View>
-          <TouchableOpacity
+          <Pressable
             onPress={block == false ? clock : handleMovimento}
             disabled={loading}
-            style={Styles.Syncbutton}>
+            style={({pressed}) => [Styles.Syncbutton, {opacity: pressed ? 0.6 : 1}]}>
             {loading ? (
               <ActivityIndicator
                 style={{
@@ -929,11 +929,11 @@ export function Home() {
                 </View>
               </>
             )}
-          </TouchableOpacity>
+          </Pressable>
           <View style={Styles.buttonContainerDown}>
-            <TouchableOpacity
+            <Pressable
               onPress={block == false ? clock : handleMakeRoute}
-              style={Styles.downButton}>
+              style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}>
               <View style={Styles.buttonContainer}>
                 <Image
                   source={Route}
@@ -941,10 +941,10 @@ export function Home() {
                 />
                 <Text style={Styles.buttonTextDown}>Montar rota</Text>
               </View>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               onPress={block == false ? clock : handleRelatory}
-              style={Styles.downButton}>
+              style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}>
               <View style={Styles.buttonContainer}>
                 <Image
                   source={Report}
@@ -952,7 +952,7 @@ export function Home() {
                 />
                 <Text style={Styles.buttonTextDown}>Relatório</Text>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <ModalError
             Title={modalError.Title}
