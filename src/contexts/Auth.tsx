@@ -14,17 +14,14 @@ import {dataSource} from '../database/database';
 import ModalError from '../components/ModalError/ModalError';
 import {requestLocationPermission} from '../components/Permissions';
 
-export const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData,
-);
+export const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   const [auth, setAuth] = useState<Auth>();
   const [loading, setLoading] = useState<boolean>(true);
   const [printer, setPrinter] = useState();
   const [token, setToken] = useState('');
-  const [databaseInitialized, setDatabaseInitialized] =
-    useState<boolean>(false);
+  const [databaseInitialized, setDatabaseInitialized] = useState<boolean>(false);
   const [modalError, setModalError] = useState({Title: '', Message: ''});
   const [modalVisible, setModalVisible] = useState(false);
   const [location, setLocation] = useState<{
@@ -46,24 +43,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
     const getPhoneInformation = () => {
       const data = Platform.constants;
-
-      const Manufacturer =
-        'Manufacturer' in data ? data.Manufacturer : 'Unknown';
+      const Manufacturer = 'Manufacturer' in data ? data.Manufacturer : 'Unknown';
       const Model = 'Model' in data ? data.Model : 'Unknown';
       const Brand = 'Brand' in data ? data.Brand : 'Unknown';
-      const Version =
-        'Version' in Platform ? Platform.Version.toString() : 'Unknown';
+      const Version = 'Version' in Platform ? Platform.Version.toString() : 'Unknown';
 
-      setInformationphone({
-        Manufacturer,
-        Model,
-        Brand,
-        Version,
-      });
+      setInformationphone({ Manufacturer, Model, Brand, Version,});
+
     };
 
     locationAuth();
     getPhoneInformation();
+
   }, []);
 
   async function locationAuth() {
@@ -164,8 +155,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         }
         await Promise.all(
           responseData.tipo_pagamento.map(async item => {
-            const typePaymentRepository =
-              dataSource.getRepository(TypePaymentEntity);
+            const typePaymentRepository = dataSource.getRepository(TypePaymentEntity);
             const existingTypePayment = await typePaymentRepository.findOne({
               where: {
                 codigo: item.codigo,
@@ -176,9 +166,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
               typePayment.codigo = item.codigo;
               typePayment.descricao = item.descricao;
               typePayment.sigla = item.Sigla;
-              await dataSource
-                .getRepository(TypePaymentEntity)
-                .save(typePayment);
+              await dataSource.getRepository(TypePaymentEntity).save(typePayment);
             }
           }),
         );
@@ -196,16 +184,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
           await dataSource.getRepository(Messenger).save(messenger);
         }
 
-        await Promise.all(
-          responseData.tipo_ocorrencia.map(async item => {
-            const typeOccurrenceRepository =
-              dataSource.getRepository(TypeOccurrenceEntity);
-            const existingTypeOccurrence =
-              await typeOccurrenceRepository.findOne({
+        await Promise.all(responseData.tipo_ocorrencia.map(async item => {
+
+            const typeOccurrenceRepository = dataSource.getRepository(TypeOccurrenceEntity);
+            const existingTypeOccurrence = await typeOccurrenceRepository.findOne({
                 where: {
                   codigo: item.codigo,
                 },
               });
+
             if (!existingTypeOccurrence) {
               const typeOccurrence = new TypeOccurrenceEntity();
               typeOccurrence.codigo = item.Id;
@@ -217,13 +204,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
           }),
         );
 
-        await Promise.all(
-          responseData.status_mensageiro.map(async item => {
+        await Promise.all(responseData.status_mensageiro.map(async item => {
             const statusMessengerRepository = dataSource.getRepository(
               StatusMessengerEntity,
             );
-            const existingStatusMessenger =
-              await statusMessengerRepository.findOne({
+            const existingStatusMessenger = await statusMessengerRepository.findOne({
                 where: {
                   codigo: item.codigo,
                 },
@@ -232,9 +217,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
               const statusMessenger = new StatusMessengerEntity();
               statusMessenger.codigo = item.codigo;
               statusMessenger.descricao = item.descricao;
-              await dataSource
-                .getRepository(StatusMessengerEntity)
-                .save(statusMessenger);
+              await dataSource.getRepository(StatusMessengerEntity).save(statusMessenger);
             }
           }),
         );
@@ -243,30 +226,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         const existingInstitution = await institutionRepository.findOne({
           where: {
             mensagem_boleto: responseData.instituicao.mensagem_boleto,
-            telefone_finalizar_android1:
-              responseData.instituicao.telefone_finalizar_android1,
-            telefone_finalizar_android2:
-              responseData.instituicao.telefone_finalizar_android2,
+            telefone_finalizar_android1: responseData.instituicao.telefone_finalizar_android1,
+            telefone_finalizar_android2: responseData.instituicao.telefone_finalizar_android2,
           },
         });
 
         if (!existingInstitution) {
           const institution = new Institution();
-          institution.mensagem_boleto =
-            responseData.instituicao.mensagem_boleto;
-          institution.telefone_finalizar_android1 =
-            responseData.instituicao.telefone_finalizar_android1;
-          institution.telefone_finalizar_android2 =
-            responseData.instituicao.telefone_finalizar_android2;
-            //ERRO AQUI
+          institution.mensagem_boleto = responseData.instituicao.mensagem_boleto;
+          institution.telefone_finalizar_android1 = responseData.instituicao.telefone_finalizar_android1;
+          institution.telefone_finalizar_android2 = responseData.instituicao.telefone_finalizar_android2;
           await dataSource.getRepository(Institution).save(institution);
         } else {
-          existingInstitution.mensagem_boleto =
-            responseData.instituicao.mensagem_boleto;
-          existingInstitution.telefone_finalizar_android1 =
-            responseData.instituicao.telefone_finalizar_android1;
-          existingInstitution.telefone_finalizar_android2 =
-            responseData.instituicao.telefone_finalizar_android2;
+          existingInstitution.mensagem_boleto = responseData.instituicao.mensagem_boleto;
+          existingInstitution.telefone_finalizar_android1 = responseData.instituicao.telefone_finalizar_android1;
+          existingInstitution.telefone_finalizar_android2 = responseData.instituicao.telefone_finalizar_android2;
           await dataSource.getRepository(Institution).save(existingInstitution);
         }
 

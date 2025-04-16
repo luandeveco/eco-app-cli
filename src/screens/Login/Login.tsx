@@ -141,7 +141,7 @@ function Login() {
           </View>
           <Pressable style={({pressed}) => [Styles.boxButton, {opacity:pressed? 0.6 : 1}]}
             onPress={() => handleLogin()}>
-            <Text style={Styles.textBotton}>Entrar</Text>
+            <Text style={Styles.textBotton}>{'Entrar'}</Text>
           </Pressable>
           <View style={Styles.containerVersion}>
             <Text style={Styles.versionText}>V {versionName}</Text>

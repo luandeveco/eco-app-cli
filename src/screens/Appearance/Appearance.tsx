@@ -82,7 +82,7 @@ export function Appearance() {
                 fontSize: 18,
                 marginLeft: '15%',
               }}>
-              Aparência
+              {'Aparência'}
             </Text>
           </View>
         </View>
@@ -95,14 +95,14 @@ export function Appearance() {
               justifyContent: 'space-between',
               height: '25%'
             }}>
-            <Text style={Styles.text}>Tela de Recibo</Text>
+            <Text style={Styles.text}>{'Tela de Recibo'}</Text>
             <View style={Styles.containerSetAparencia}>
               <Pressable onPress={decreaseFontSize} style={({pressed}) => [Styles.setPress, {opacity: pressed ? 0.6 : 1}]}>
-                <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 24}}>-</Text>
+                <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 24}}>{'-'}</Text>
               </Pressable>
               <Text style={{color: '#000000', fontWeight: '700'}}>{fontSize}</Text>
               <Pressable onPress={increaseFontSize} style={({pressed}) => [Styles.setPress, {opacity: pressed ? 0.6 : 1}]}>
-                <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 18}}>+</Text>
+                <Text style={{color: isDarkMode ? '#000000' : '#000000', fontSize: 18}}>{'+'}</Text>
               </Pressable>
             </View>
           </View>
