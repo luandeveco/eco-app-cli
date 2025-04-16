@@ -6,27 +6,8 @@ export const Styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  containerPrinters:{
-    paddingHorizontal: '5%',
-  },
-    LineContainerButton: {
-    width: '28%',
-    height: 40,
-    borderRadius: 8,
-    backgroundColor: '#2974B4',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 3,
-    borderColor: '#2974B4',
-    borderWidth: 1,
-  },
   Container: {
     paddingHorizontal: "5%"
-
-  },
-  Title: {
-    flexDirection: 'row',
-    alignSelf: 'center',
   },
   text: {
     color: '#000000',
