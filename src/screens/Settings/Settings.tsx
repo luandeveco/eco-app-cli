@@ -76,39 +76,19 @@ export function Setting() {
                     source={require('../../assets/icons/voltar.png')}
                     style={{maxWidth: 15, height: 15}}
                   />
-                  <Text
-                    style={{
-                      color: '#2974B4',
-                      marginLeft: 5,
-                      fontWeight: '700',
-                      fontSize: 18,
-                    }}>
+                  <Text style={{color: '#2974B4', marginLeft: 5,fontWeight: '700',fontSize: 18,}}>
                     Voltar
                   </Text>
                 </View>
               </Pressable>
-              <Text
-                style={{
-                  color: '#000000',
-                  fontWeight: '700',
-                  fontSize: 18,
-                  marginLeft: '15%',
-                }}>
+              <Text style={{ color: '#000000', fontWeight: '700',fontSize: 18, marginLeft: '15%'}}>
                 Configurações
               </Text>
             </View>
             {/** Opções */}
             {/** Opção da impressora */}
             <View>
-              <Pressable
-                style={({pressed}) => [{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: '8%',
-                  borderBottomWidth: 1,
-                  paddingVertical: '5%',
-                  justifyContent: 'space-between',
-                },{opacity : pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.buttonOptions , {opacity : pressed ? 0.6 : 1}]}
                 onPress={handlePrintes}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -116,12 +96,7 @@ export function Setting() {
                     style={{maxWidth: 20, height: 20, alignItems: 'center'}}
                   />
                   <Text
-                    style={{
-                      color: '#000000',
-                      fontWeight: '500',
-                      marginLeft: '3%',
-                      fontSize: 18,
-                    }}>
+                    style={Styles.titleConfig}>
                     Impressora
                   </Text>
                 </View>
@@ -135,15 +110,7 @@ export function Setting() {
             </View>
             {/** Opção do Relatório */}
             <View>
-              <Pressable
-                style={({pressed}) => [{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: '2%',
-                  borderBottomWidth: 1,
-                  paddingVertical: '5%',
-                  justifyContent: 'space-between',
-                },{opacity : pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.buttonConfig,{opacity : pressed ? 0.6 : 1}]}
                 onPress={handleReceipt}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -151,12 +118,7 @@ export function Setting() {
                     style={{maxWidth: 20, height: 20, alignItems: 'center'}}
                   />
                   <Text
-                    style={{
-                      color: '#000000',
-                      fontWeight: '500',
-                      marginLeft: '3%',
-                      fontSize: 18,
-                    }}>
+                    style={Styles.titleConfig}>
                     Relatório
                   </Text>
                 </View>
@@ -170,15 +132,7 @@ export function Setting() {
             </View>
             {/** Opção do Aparência */}
             <View>
-              <Pressable
-                style={({pressed}) => [{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: '2%',
-                  borderBottomWidth: 1,
-                  paddingVertical: '5%',
-                  justifyContent: 'space-between',
-                },{opacity : pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.buttonConfig,{opacity : pressed ? 0.6 : 1}]}
                 onPress={handleAppearance}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -186,12 +140,7 @@ export function Setting() {
                     style={{maxWidth: 20, height: 20, alignItems: 'center'}}
                   />
                   <Text
-                    style={{
-                      color: '#000000',
-                      fontWeight: '500',
-                      marginLeft: '3%',
-                      fontSize: 18,
-                    }}>
+                    style={Styles.titleConfig}>
                     Aparência
                   </Text>
                 </View>
@@ -205,25 +154,12 @@ export function Setting() {
             </View>
             {/** Suporte */}
             <View>
-              <Pressable
-                style={({pressed}) => [{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: '2%',
-                  borderBottomWidth: 1,
-                  paddingVertical: '5%',
-                  justifyContent: 'space-between',
-                },{opacity : pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.buttonConfig, {opacity : pressed ? 0.6 : 1}]}
                 onPress={modalRedirect}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <SimpleLineIcons name="support" color="#2974B4" size={22} />
                   <Text
-                    style={{
-                      color: '#000000',
-                      fontWeight: '500',
-                      marginLeft: '3%',
-                      fontSize: 18,
-                    }}>
+                    style={Styles.titleConfig}>
                     Suporte
                   </Text>
                 </View>
@@ -231,25 +167,12 @@ export function Setting() {
             </View>
             {/** Logout */}
             <View>
-              <Pressable
-                style={({pressed}) => [{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: '2%',
-                  borderBottomWidth: 1,
-                  paddingVertical: '5%',
-                  justifyContent: 'space-between',
-                },{opacity : pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.buttonConfig,{opacity : pressed ? 0.6 : 1}]}
                 onPress={signOut}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <SimpleLineIcons name="logout" color="#B42929" size={22} />
                   <Text
-                    style={{
-                      color: '#000000',
-                      fontWeight: '500',
-                      marginLeft: '3%',
-                      fontSize: 18,
-                    }}>
+                    style={Styles.titleConfig}>
                     Logout
                   </Text>
                 </View>
@@ -265,13 +188,11 @@ export function Setting() {
                 Você será direcionado para o Whatsapp
               </Text>
               <View style={Styles.buttonOptions}>
-                <Pressable
-                  style={({pressed}) => [Styles.ButtonOptionsWhatsapp, {opacity : pressed ? 0.6 : 1}]}
+                <Pressable style={({pressed}) => [Styles.ButtonOptionsWhatsapp, {opacity : pressed ? 0.6 : 1}]}
                   onPress={RedirectWhatsapp}>
                   <Text style={Styles.textButtonModel}>Falar com suporte</Text>
                 </Pressable>
-                <Pressable
-                  style={({pressed}) => [Styles.ButtonOptionscancel,{opacity : pressed ? 0.6 : 1}]}
+                <Pressable style={({pressed}) => [Styles.ButtonOptionscancel,{opacity : pressed ? 0.6 : 1}]}
                   onPress={() => setContactSupport(false)}>
                   <Text style={Styles.textButtonModel}>Cancelar</Text>
                 </Pressable>

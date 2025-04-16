@@ -36,6 +36,20 @@ export const Styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  buttonConfig:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '2%',
+    borderBottomWidth: 1,
+    paddingVertical: '5%',
+    justifyContent: 'space-between',
+  },
+  titleConfig:{
+    color: '#000000',
+    fontWeight: '500',
+    marginLeft: '3%',
+    fontSize: 18,
+  },
   Title: {
     flexDirection: 'row',
     alignSelf: 'center',
