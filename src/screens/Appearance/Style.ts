@@ -9,17 +9,6 @@ export const Styles = StyleSheet.create({
   containerPrinters:{
     paddingHorizontal: '5%',
   },
-    LineContainer: {
-    width: '28%',
-    height: 40,
-    borderRadius: 8,
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 3,
-    borderColor: '#2974B4',
-    borderWidth: 1,
-  },
     LineContainerButton: {
     width: '28%',
     height: 40,
@@ -34,10 +23,6 @@ export const Styles = StyleSheet.create({
   Container: {
     paddingHorizontal: "5%"
 
-  },
-  button:{
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   Title: {
     flexDirection: 'row',

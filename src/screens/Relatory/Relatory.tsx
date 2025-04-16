@@ -23,7 +23,7 @@ import {
 } from '../../database/entities/Movement';
 import {Messenger} from '../../database/entities/Messenger';
 import {useNavigation} from '@react-navigation/native';
-import BackButton from '../../components/ButtonBack/BackButton';
+import NavButton from '../../components/NavButton/NavButton';
 import {DateMovementChosen} from '../../database/entities/DateMovementChosen';
 import {api} from '../../services/Api';
 import {Auth} from '../../database/entities/Auth';
@@ -1690,7 +1690,7 @@ export function Relatory() {
         style={{width: '100%'}}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{alignItems: 'center'}}>
-        <BackButton onPress={handleReturn} />
+        <NavButton onPress={handleReturn} />
         <Pressable
           style={({pressed}) => [Styles.ButtonTitle, {opacity : pressed ? 0.6 : 1}]}
           onPress={() => {

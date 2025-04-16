@@ -3,7 +3,7 @@ import {Pressable, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Styles} from './Style';
 
-const BackButton = ({onPress}) => {
+const NavButton = ({onPress}) => {
   return (
     <Pressable style={({pressed}) => [Styles.LineContainer, {opacity : pressed ? 0.6 : 1}]} onPress={onPress}>
       <Icon
@@ -17,4 +17,4 @@ const BackButton = ({onPress}) => {
   );
 };
 
-export default React.memo(BackButton)
+export default React.memo(NavButton)

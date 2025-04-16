@@ -17,6 +17,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {dataSource} from '../../database/database';
 import {InstitutionInformation} from '../../database/entities/InstitutionInformation';
 import {useAuth} from '../../contexts/Auth';
+import BackButton from '../../components/BackButton/BackButton';
 
 export function Setting() {
   const [contactSupport, setContactSupport] = useState(false);
@@ -68,7 +69,8 @@ export function Setting() {
           <View style={Styles.Container}>
             {/** Cabeçalho da tela: Botão de voltar e título */}
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Pressable
+              <BackButton onPress={handleReturn}/>
+              {/* <Pressable
                 style={({pressed}) => [Styles.LineContainer, {opacity : pressed ? 0.6 : 1}]}
                 onPress={handleReturn}>
                 <View style={Styles.button}>
@@ -80,15 +82,15 @@ export function Setting() {
                     Voltar
                   </Text>
                 </View>
-              </Pressable>
+              </Pressable> */}
               <Text style={{ color: '#000000', fontWeight: '700',fontSize: 18, marginLeft: '15%'}}>
                 Configurações
               </Text>
             </View>
             {/** Opções */}
             {/** Opção da impressora */}
-            <View>
-              <Pressable style={({pressed}) => [Styles.buttonOptions , {opacity : pressed ? 0.6 : 1}]}
+            <View style={{marginTop:'6%'}}>
+              <Pressable style={({pressed}) => [Styles.buttonConfig, {opacity : pressed ? 0.6 : 1}]}
                 onPress={handlePrintes}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image

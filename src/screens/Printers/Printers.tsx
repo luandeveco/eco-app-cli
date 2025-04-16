@@ -18,6 +18,7 @@ import {Printer} from '../../database/entities/Printers';
 import {dataSource} from '../../database/database';
 import {ModalCheck} from '../../components/ModalCheck/ModalCheck';
 import ModalError from '../../components/ModalError/ModalError';
+import BackButton from '../../components/BackButton/BackButton';
 
 export function Printers() {
   const [loading, setLoading] = useState(false);
@@ -137,19 +138,7 @@ export function Printers() {
         <View style={Styles.Container}>
           {/** Cabeçalho da tela: Botão de voltar e título */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Pressable
-              style={({pressed}) => [Styles.LineContainer, {opacity: pressed ? 0.6 : 1}]}
-              onPress={handleReturn}>
-              <View style={Styles.button}>
-                <Image
-                  source={require('../../assets/icons/voltar.png')}
-                  style={{maxWidth: 15, height: 15}}
-                />
-                <Text style={Styles.backButton}>
-                  Voltar
-                </Text>
-              </View>
-            </Pressable>
+            <BackButton onPress={handleReturn}/>
             <Text
               style={Styles.printButton}>
               Impressoras

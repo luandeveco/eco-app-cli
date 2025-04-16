@@ -26,7 +26,7 @@ import {paymentReceipt} from './Components/Components/paymentReceipt';
 import {formatDate} from '../../utils/Formatting/FormattingData';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Dropdown} from 'react-native-element-dropdown';
-import BackButton from '../../components/ButtonBack/BackButton';
+import NavButton from '../../components/NavButton/NavButton';
 import {In} from 'typeorm';
 import {ReceiptSettings} from '../../database/entities/ReceiptSettings';
 import React from 'react';
@@ -939,7 +939,7 @@ function SetRoute(route) {
   return (
     <View style={Styles.view}>
       <StatusBar backgroundColor="#2974B4" barStyle="light-content" />
-      <BackButton onPress={handleReturn} />
+      <NavButton onPress={handleReturn} />
       <View
         style={[
           Styles.FilterBox,

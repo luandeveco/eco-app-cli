@@ -192,8 +192,7 @@ export function Home() {
       .createQueryBuilder('auth')
       .orderBy('auth.id', 'DESC')
       .getOne();
-    await api
-      .get('/data_movimento', {
+    await api.get('/data_movimento', {
         headers: {
           Authorization: `Bearer ${authDataFromDb.access_token}`,
         },
@@ -217,8 +216,7 @@ export function Home() {
       .createQueryBuilder('auth')
       .orderBy('auth.id', 'DESC')
       .getOne();
-    await api
-      .get('/conta_bancaria', {
+    await api.get('/conta_bancaria', {
         headers: {
           Authorization: `Bearer ${authDataFromDb.access_token}`,
         },
@@ -909,21 +907,12 @@ export function Home() {
             disabled={loading}
             style={({pressed}) => [Styles.Syncbutton, {opacity: pressed ? 0.6 : 1}]}>
             {loading ? (
-              <ActivityIndicator
-                style={{
-                  position: 'absolute',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                size="large"
-                color="#ffffff"
-              />
+              <ActivityIndicator style={{position: 'absolute', justifyContent: 'center', alignItems: 'center'}} size="large" color="#ffffff"/>
             ) : (
               <>
                 <View style={Styles.buttonContainer}>
-                  <Image
+                  <Image style={{width: 20, height: 20, marginRight: '2%'}}
                     source={synchronization}
-                    style={{width: 20, height: 20, marginRight: '2%'}}
                   />
                   <Text style={Styles.buttonText}>Sincronizar</Text>
                 </View>
@@ -931,24 +920,20 @@ export function Home() {
             )}
           </Pressable>
           <View style={Styles.buttonContainerDown}>
-            <Pressable
-              onPress={block == false ? clock : handleMakeRoute}
-              style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}>
+            <Pressable style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}
+              onPress={block == false ? clock : handleMakeRoute}>
               <View style={Styles.buttonContainer}>
-                <Image
+                <Image style={{width: 20, height: 20, marginRight: '2%'}}
                   source={Route}
-                  style={{width: 20, height: 20, marginRight: '2%'}}
                 />
                 <Text style={Styles.buttonTextDown}>Montar rota</Text>
               </View>
             </Pressable>
-            <Pressable
-              onPress={block == false ? clock : handleRelatory}
-              style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}>
+            <Pressable style={({pressed}) => [Styles.downButton, {opacity: pressed ? 0.6 : 1}]}
+              onPress={block == false ? clock : handleRelatory}>
               <View style={Styles.buttonContainer}>
-                <Image
+                <Image style={{width: 20, height: 20, marginRight: '2%'}}
                   source={Report}
-                  style={{width: 20, height: 20, marginRight: '2%'}}
                 />
                 <Text style={Styles.buttonTextDown}>Relatório</Text>
               </View>
@@ -968,7 +953,7 @@ export function Home() {
           />
         </View>
         <View style={Styles.containerVersion}>
-          <Text style={Styles.versionText}>V {versionName}</Text>
+          <Text onPress={() => console.log(dataSource)} style={Styles.versionText}>V {versionName}</Text>
         </View>
       </ImageBackground>
     </>

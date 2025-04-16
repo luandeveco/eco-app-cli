@@ -42,7 +42,7 @@ import {Dropdown} from 'react-native-element-dropdown';
 import {formatPhoneNumber} from '../../utils/Formatting/FormatPhone';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TypeOccurrence} from '../../database/entities/TypeOccurrence';
-import BackButton from '../../components/ButtonBack/BackButton';
+import NavButton from '../../components/NavButton/NavButton';
 import {sendText} from './Components/Texts/sendAlertWhatsapp';
 import {printNotice as print} from '../NewReceipt/Components/Texts/printNotice';
 import ModalError from '../../components/ModalError/ModalError';
@@ -728,7 +728,7 @@ function NewReceipt({navigation, route}) {
         barStyle="light-content"
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <BackButton onPress={handleReturn} />
+        <NavButton onPress={handleReturn} />
         <View style={Styles.ButtonDownView}>
           {checkLocation === true ? (
             <Pressable

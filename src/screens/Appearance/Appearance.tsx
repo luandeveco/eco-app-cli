@@ -13,6 +13,7 @@ import {Styles} from './Style';
 import { MAX_FONT_SIZE, MIN_FONT_SIZE } from '../../theme/Theme';
 import { dataSource } from '../../database/database';
 import { ReceiptSettings } from '../../database/entities/ReceiptSettings';
+import BackButton from '../../components/BackButton/BackButton';
 
 export function Appearance() {
   const navigation = useNavigation();
@@ -73,25 +74,7 @@ export function Appearance() {
               alignItems: 'center',
               marginTop: '15%',
             }}>
-            <Pressable
-              style={({pressed}) => [Styles.LineContainer, {opacity: pressed ? 0.6 : 1}]}
-              onPress={handleReturn}>
-              <View style={Styles.button}>
-                <Image
-                  source={require('../../assets/icons/voltar.png')}
-                  style={{maxWidth: 15, height: 15}}
-                />
-                <Text
-                  style={{
-                    color: '#2974B4',
-                    marginLeft: 5,
-                    fontWeight: '700',
-                    fontSize: 18,
-                  }}>
-                  Voltar
-                </Text>
-              </View>
-            </Pressable>
+            <BackButton onPress={handleReturn}/>
             <Text
               style={{
                 color: '#000000',

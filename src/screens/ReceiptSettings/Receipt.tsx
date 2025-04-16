@@ -14,6 +14,7 @@ import {useState, useRef, useEffect} from 'react';
 import {dataSource} from '../../database/database';
 import {ReceiptSettings as ReceiptR} from '../../database/entities/ReceiptSettings';
 import AccordionMenu from '../../components/AccordionMenu/AccordionMenu';
+import BackButton from '../../components/BackButton/BackButton';
 
 export function ReceiptSettings() {
     const [isOn, setIsOn] = useState(false);
@@ -210,25 +211,7 @@ export function ReceiptSettings() {
           <View style={Styles.Container}>
             {/** Cabeçalho da tela: Botão de voltar e título */}
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Pressable
-                style={({pressed}) => [Styles.LineContainer, {opacity : pressed ? 0.6 : 1}]}
-                onPress={handleReturn}>
-                <View style={Styles.button}>
-                  <Image
-                    source={require('../../assets/icons/voltar.png')}
-                    style={{maxWidth: 15, height: 15}}
-                  />
-                  <Text
-                    style={{
-                      color: '#2974B4',
-                      marginLeft: 5,
-                      fontWeight: '700',
-                      fontSize: 18,
-                    }}>
-                    Voltar
-                  </Text>
-                </View>
-              </Pressable>
+              <BackButton onPress={handleReturn}/>
               <Text
                 style={{
                   color: '#000000',
