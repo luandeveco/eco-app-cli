@@ -30,15 +30,9 @@ function Login() {
   useEffect(() => {
     requestLocationPermission();
     // Adiciona ouvinte para o evento de teclado aparecendo
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      keyboardDidShow,
-    );
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
     // Adiciona ouvinte para o evento de teclado desaparecendo
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      keyboardDidHide,
-    );
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
     // Remove os ouvintes de evento quando o componente é desmontado
     return () => {
       keyboardDidShowListener.remove();
@@ -86,28 +80,23 @@ function Login() {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
-      <ImageBackground
-        source={require('../../assets/Background/BackgroundLogin.png')}
-        style={Styles.backgroundImage}>
-        <KeyboardAvoidingView
-          style={Styles.container}
+      <ImageBackground style={Styles.backgroundImage}
+        source={require('../../assets/Background/BackgroundLogin.png')}>
+        <KeyboardAvoidingView style={Styles.container}
           keyboardVerticalOffset={keyboardVerticalOffset}>
-          <Image
-            style={Styles.Logo}
+          <Image style={Styles.Logo}
             source={require('../../assets/img/LogoEcoBranco.png')}
             alt="Logo da Eco Consultoria"
             resizeMode="contain"
           />
-          <Text style={Styles.textTitle}>Seja bem-vindo(a)!</Text>
+          <Text style={Styles.textTitle}>{'Seja bem-vindo(a)!'}</Text>
           <View style={Styles.iconTextContainer}>
-            <Image
+            <Image style={Styles.icon}
               source={require('../../assets/iconsWhite/iconUser.png')}
-              style={Styles.icon}
             />
-            <Text style={Styles.text}>Código do usuário</Text>
+            <Text style={Styles.text}>{'Código do usuário'}</Text>
           </View>
-          <TextInput
-            style={Styles.InputArea}
+          <TextInput style={Styles.InputArea}
             underlineColorAndroid="transparent"
             keyboardType="numeric"
             value={codigo}
@@ -125,11 +114,10 @@ function Login() {
                   source={require('../../assets/iconsWhite/iconPassword.png')}
                   style={Styles.icon}
                 />
-                <Text style={Styles.text}>Senha</Text>
+                <Text style={Styles.text}>{'Senha'}</Text>
               </View>
-              <TextInput
+              <TextInput style={Styles.InputArea}
                 ref={passwordInputRef}
-                style={Styles.InputArea}
                 underlineColorAndroid="transparent"
                 keyboardType={'default'}
                 value={senha}
@@ -139,22 +127,19 @@ function Login() {
                 secureTextEntry={!isPasswordVisible}
                 cursorColor={'#ffffff'}
               />
-              <Pressable
-                style={({pressed}) => [Styles.showPasswordButton, {opacity: pressed ? 0.6 : 1}]}
+              <Pressable style={({pressed}) => [Styles.showPasswordButton, {opacity: pressed ? 0.6 : 1}]}
                 onPress={togglePasswordVisibility}>
-                <Image
+                <Image style={Styles.eyeIcon}
                   source={
                     isPasswordVisible
                       ? require('../../assets/iconsWhite/eyeIcon.png')
                       : require('../../assets/iconsWhite/eyeIconNot.png')
                   }
-                  style={Styles.eyeIcon}
                 />
               </Pressable>
             </View>
           </View>
-          <Pressable
-            style={({pressed}) => [Styles.boxButton, {opacity:pressed? 0.6 : 1}]}
+          <Pressable style={({pressed}) => [Styles.boxButton, {opacity:pressed? 0.6 : 1}]}
             onPress={() => handleLogin()}>
             <Text style={Styles.textBotton}>Entrar</Text>
           </Pressable>

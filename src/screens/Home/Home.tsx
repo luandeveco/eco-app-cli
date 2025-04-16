@@ -12,10 +12,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {api} from '../../services/Api';
 import {formatDate} from '../../utils/Formatting/FormattingData';
-import {
-  requestBluetoothPermissions,
-  requestLocationPermission,
-} from '../../components/Permissions';
+import {requestBluetoothPermissions, requestLocationPermission} from '../../components/Permissions';
 import {getCurrentLocation} from '../../utils/GeoLocation';
 import {dataSource} from '../../database/database';
 import {Auth} from '../../database/entities/Auth';
@@ -121,7 +118,6 @@ export function Home() {
       .then(async function (response) {
         const responseDataHoraAberturaSistema = response.data[0].HoraAberturaSistema;
         const responseDataHoraFechamentoSistema = response.data[0].HoraFechamentoSistema;
-
         const shiftRepository = dataSource.getRepository(ShiftEntiti);
         const existingRecord = await shiftRepository
           .createQueryBuilder('shift')
@@ -146,10 +142,7 @@ export function Home() {
 
           await shiftRepository.save(newRecord);
         }
-        Block(
-          responseDataHoraAberturaSistema,
-          responseDataHoraFechamentoSistema,
-        );
+        Block( responseDataHoraAberturaSistema,responseDataHoraFechamentoSistema);
       })
       .catch(async function (error) {
         const ShiftDate = await dataSource
@@ -382,21 +375,15 @@ export function Home() {
     let minutes = now.getMinutes().toString().padStart(2, '0');
     const timeFormatted = `${hours}:${minutes}`;
 
-    await api
-      .get('/turno', {
+    await api.get('/turno', {
         headers: {
           Authorization: `Bearer ${authDataFromDb.access_token}`,
         },
       })
       .then(async function (response) {
-        const responseDataHoraAberturaSistema =
-          response.data[0].HoraAberturaSistema;
-        const responseDataHoraFechamentoSistema =
-          response.data[0].HoraFechamentoSistema;
-        if (
-          timeFormatted >= responseDataHoraAberturaSistema &&
-          timeFormatted <= responseDataHoraFechamentoSistema
-        ) {
+        const responseDataHoraAberturaSistema = response.data[0].HoraAberturaSistema;
+        const responseDataHoraFechamentoSistema = response.data[0].HoraFechamentoSistema;
+        if (timeFormatted >= responseDataHoraAberturaSistema && timeFormatted <= responseDataHoraFechamentoSistema) {
           const movementRepository = dataSource.getRepository(MovementEntities);
           const movementDataFrom = await movementRepository
             .createQueryBuilder('movement')
@@ -422,10 +409,7 @@ export function Home() {
               setModalVisible(true);
             } else {
               setLoading(true);
-              await api
-                .post(
-                  '/movimento',
-                  {
+              await api.post('/movimento',{
                     data_movimento: dataMovement,
                     conta_bancaria: bankAccount,
                     localizacao: {
@@ -447,8 +431,7 @@ export function Home() {
                   const responseData = response.data.movimento;
                   const responseDataCounties = response.data.municipios;
                   const responseDataSuburb = response.data.bairros;
-                  await Promise.all(
-                    responseDataCounties.map(async item => {
+                  await Promise.all(responseDataCounties.map(async item => {
                       // Verifica se o registro já existe na tabela CountiesMovement
                       const existingCounty = await CountiesMovement.findOne({
                         where: {descricao: item.descricao},
@@ -463,25 +446,20 @@ export function Home() {
                     }),
                   );
 
-                  await Promise.all(
-                    responseDataSuburb.map(async item => {
+                  await Promise.all(responseDataSuburb.map(async item => {
                       const existingSuburb = await SuburbMovement.findOne({
                         where: {descricao: item.descricao},
                       });
                       if (!existingSuburb) {
                         const suburbMovement = new SuburbMovement();
-                        suburbMovement.descricaoCounties =
-                          item.descricaoCounties;
+                        suburbMovement.descricaoCounties = item.descricaoCounties;
                         suburbMovement.descricao = item.descricao;
-                        await dataSource
-                          .getRepository(SuburbMovement)
-                          .save(suburbMovement);
+                        await dataSource.getRepository(SuburbMovement).save(suburbMovement);
                       }
                     }),
                   );
 
-                  await Promise.all(
-                    responseData.map(async item => {
+                  await Promise.all(responseData.map(async item => {
                       // Verifica se o movimento já existe no banco de dados local
                       const existingMovement = await movementRepository.findOne(
                         {
@@ -561,8 +539,7 @@ export function Home() {
                         existingMovement.end_complemento = item.end_complemento;
                         existingMovement.end_referencia = item.end_referencia;
                         existingMovement.end_municipio = item.end_municipio;
-                        existingMovement.end_municipio_cod =
-                          item.end_municipio_cod;
+                        existingMovement.end_municipio_cod = item.end_municipio_cod;
                         existingMovement.end_bairro_cod = item.end_bairro_cod;
                         existingMovement.end_bairro = item.end_bairro;
                         existingMovement.telefone1 = item.telefone1;
@@ -571,30 +548,22 @@ export function Home() {
                         existingMovement.turno = item.turno;
                         existingMovement.operador = item.operador;
                         existingMovement.saldos = item.saldos;
-                        existingMovement.endereco_cobranca =
-                          item.endereco_cobranca;
+                        existingMovement.endereco_cobranca = item.endereco_cobranca;
                         existingMovement.distancia = item.distancia;
-                        await dataSource
-                          .getRepository(MovementEntities)
-                          .save(existingMovement);
+                        await dataSource.getRepository(MovementEntities).save(existingMovement);
                       }
                       // Busca todos os recibos do banco de dados local
                       const allLocalReceipts = await movementRepository.find();
-
-                      await Promise.all(
-                        allLocalReceipts.map(async localReceipt => {
+                      await Promise.all(allLocalReceipts.map(async localReceipt => {
                           // Verifica se o recibo local está presente na resposta da API
                           const receiptInApiResponse = responseData.find(
-                            apiReceipt =>
-                              apiReceipt.numero_recibo ===
-                              localReceipt.numero_recibo,
+                              apiReceipt =>
+                              apiReceipt.numero_recibo === localReceipt.numero_recibo,
                           );
 
                           // Se o recibo local não estiver presente na resposta da API, apaga-o do banco de dados local
                           if (!receiptInApiResponse) {
-                            console.log(
-                              `Deleting receipt: ${localReceipt.numero_recibo}`,
-                            );
+                            console.log(`Deleting receipt: ${localReceipt.numero_recibo}`);
                             await movementRepository.delete({
                               numero_recibo: localReceipt.numero_recibo,
                             });
@@ -611,18 +580,12 @@ export function Home() {
                   if (!existingDateMovement) {
                     const date_movement = new DateMovementChosen();
                     date_movement.valuecollected = dataMovement;
-                    await dataSource
-                      .getRepository(DateMovementChosen)
-                      .save(date_movement);
+                    await dataSource.getRepository(DateMovementChosen).save(date_movement);
                   }
                   const AccountMovementChosen = new accountMovementChosen();
                   AccountMovementChosen.valuecollected = bankAccount;
-                  await dataSource
-                    .getRepository(accountMovementChosen)
-                    .save(AccountMovementChosen);
-
-                  await Promise.all(
-                    dataMovementGeneral.map(async item => {
+                  await dataSource.getRepository(accountMovementChosen).save(AccountMovementChosen);
+                  await Promise.all(dataMovementGeneral.map(async item => {
                       // Verifica se o registro já existe na tabela DateMovement
                       const existingDateMovement = await DateMovement.findOne({
                         where: {value: item.value},
@@ -631,15 +594,12 @@ export function Home() {
                         const dataMovementGeneralBase = new DateMovement();
                         dataMovementGeneralBase.label = item.label;
                         dataMovementGeneralBase.value = item.value;
-                        await dataSource
-                          .getRepository(DateMovement)
-                          .save(dataMovementGeneralBase);
+                        await dataSource.getRepository(DateMovement).save(dataMovementGeneralBase);
                       }
                     }),
                   );
 
-                  await Promise.all(
-                    bankAccountGeneral.map(async item => {
+                  await Promise.all(bankAccountGeneral.map(async item => {
                       const existingAccount = await AccountsBank.findOne({
                         where: {value: item.value},
                       });
@@ -647,9 +607,7 @@ export function Home() {
                         const bankAccountGeneralBase = new AccountsBank();
                         bankAccountGeneralBase.label = item.label;
                         bankAccountGeneralBase.value = item.value;
-                        await dataSource
-                          .getRepository(AccountsBank)
-                          .save(bankAccountGeneralBase);
+                        await dataSource.getRepository(AccountsBank).save(bankAccountGeneralBase);
                       }
                     }),
                   );
@@ -774,9 +732,8 @@ export function Home() {
           modalVisible || modalVisibleCheck ? 'light-content' : 'dark-content'
         }
       />
-      <ImageBackground
-        source={require('../../assets/Background/BackgroundHome.png')}
-        style={Styles.backgroundImage}>
+      <ImageBackground style={Styles.backgroundImage}
+        source={require('../../assets/Background/BackgroundHome.png')}>
         <View style={Styles.containerHome}>
           <View style={Styles.container}>
             <View style={Styles.containerTitle}>
@@ -784,19 +741,16 @@ export function Home() {
                 <Text style={Styles.textMens}>
                   Olá, {formatNameOne(messenger.nome)}!
                 </Text>
-                <Image
-                  style={{width: 22, height: 22, marginLeft: '3%'}}
+                <Image style={{width: 22, height: 22, marginLeft: '3%'}}                  
                   source={require('../../assets/iconsBlack/maoAcenando.png')}
                   alt="Icone de uma mão"
                 />
               </View>
               <Text style={Styles.textMensa}>Mensageiro</Text>
             </View>
-            <Pressable
-              onPress={handleSettings}
-              style={({pressed}) => [Styles.Settingbutton, {opacity: pressed ? 0.6 : 1}]}>
-              <Image
-                style={{width: 25, height: 25, marginBottom: '5%'}}
+            <Pressable style={({pressed}) => [Styles.Settingbutton, {opacity: pressed ? 0.6 : 1}]}
+              onPress={handleSettings}>
+              <Image  style={{width: 25, height: 25, marginBottom: '5%'}}
                 source={require('../../assets/configuracoes-cog.png')}
                 alt="Icone da tela de configuração"
               />
@@ -857,9 +811,8 @@ export function Home() {
             />
             <Dropdown
               renderLeftIcon={() => (
-                <Image
+                <Image style={{width: 20, height: 20, marginRight: '2%'}}
                   source={Account}
-                  style={{width: 20, height: 20, marginRight: '2%'}}
                 />
               )}
               data={bankAccountGeneral}
@@ -893,19 +846,17 @@ export function Home() {
               }}
               iconColor={deactivateAccount == true ? '#d4d4d4' : '#ffffff'}
             />
-            <TextInput
+            <TextInput style={Styles.inputText}
               placeholder="Envelope do depósito"
               underlineColorAndroid="transparent"
               returnKeyType="next"
               placeholderTextColor="#ffffff"
               keyboardType="default"
-              style={Styles.inputText}
             />
           </View>
-          <Pressable
+          <Pressable style={({pressed}) => [Styles.Syncbutton, {opacity: pressed ? 0.6 : 1}]}
             onPress={block == false ? clock : handleMovimento}
-            disabled={loading}
-            style={({pressed}) => [Styles.Syncbutton, {opacity: pressed ? 0.6 : 1}]}>
+            disabled={loading}>
             {loading ? (
               <ActivityIndicator style={{position: 'absolute', justifyContent: 'center', alignItems: 'center'}} size="large" color="#ffffff"/>
             ) : (
