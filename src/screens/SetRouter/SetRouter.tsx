@@ -156,8 +156,7 @@ function SetRoute(route) {
       .getRawMany();
 
     const updatedMunicipalities = checkMunicipality.map(m => {
-      const municipalityData = receiptCounts.find(
-        count =>
+      const municipalityData = receiptCounts.find(count =>
           count.municipality?.trim().toLowerCase() ===
           m.descricao?.trim().toLowerCase(),
       );
@@ -193,10 +192,7 @@ function SetRoute(route) {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const timeFormatted = `${hours}:${minutes}`;
-    if (
-      timeFormatted >= shiftRepository.HoraAberturaSistema &&
-      timeFormatted <= shiftRepository.HoraFechamentoSistema
-    ) {
+    if (timeFormatted >= shiftRepository.HoraAberturaSistema && timeFormatted <= shiftRepository.HoraFechamentoSistema) {
       setBlock(true);
     } else {
       setBlock(false);
@@ -717,7 +713,16 @@ function SetRoute(route) {
 
   const renderItem = ({item}) => {
     return (
-      <Pressable
+      <Pressable style={({pressed}) => [
+        Styles.CardReceipt,
+        isEnabled == false
+          ? {backgroundColor: '#fff'}
+          : {
+              backgroundColor:
+                selectedId == item.numero_recibo ? '#fff' : '#fbfbfb86',
+            },
+            {opacity : pressed ? 0.6 : 1}
+        ]}
         onPress={() =>
           isEnabled == false
             ? block == false
@@ -725,16 +730,7 @@ function SetRoute(route) {
               : handleReceipt(item.numero_recibo, item.cod_tipo_pagamento)
             : saveRoute(item.numero_recibo)
         }
-        style={({pressed}) => [
-          Styles.CardReceipt,
-          isEnabled == false
-            ? {backgroundColor: '#fff'}
-            : {
-                backgroundColor:
-                  selectedId == item.numero_recibo ? '#fff' : '#fbfbfb86',
-              },
-              {opacity : pressed ? 0.6 : 1}
-        ]}>
+       >
         <View>
           {/**Cabeçalho do recibo */}
           <View style={Styles.ReceiptData}>
@@ -874,13 +870,7 @@ function SetRoute(route) {
           {item?.doador_novo == false ? (
             ''
           ) : (
-            <Text
-              style={{
-                color: '#2974B4',
-                fontSize: 16,
-                fontWeight: 'bold',
-                marginBottom: 5,
-              }}>
+            <Text style={{color: '#2974B4',fontSize: 16,fontWeight: 'bold',marginBottom: 5}}>
               DOADOR NOVO
             </Text>
           )}
@@ -923,13 +913,8 @@ function SetRoute(route) {
           backgroundColor="transparent"
           barStyle="dark-content"
         />
-        <ImageBackground
-          source={require('../../assets/Background/BackgroungConfig.png')}
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <ImageBackground style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}
+          source={require('../../assets/Background/BackgroungConfig.png')}>
           <ActivityIndicator size="large" color="#2974B4" />
         </ImageBackground>
       </>
@@ -940,11 +925,7 @@ function SetRoute(route) {
     <View style={Styles.view}>
       <StatusBar backgroundColor="#2974B4" barStyle="light-content" />
       <NavButton onPress={handleReturn} />
-      <View
-        style={[
-          Styles.FilterBox,
-          filterOpen == true ? {height: height * 0.38} : {},
-        ]}>
+      <View style={[ Styles.FilterBox, filterOpen == true ? {height: height * 0.38} : {}]}>
         <Pressable
           style={({pressed}) => [Styles.FilterLine, {opacity : pressed ? 0.6 : 1}]}
           onPress={() => setFilterOpen(filterOpen == true ? false : true)}>
@@ -1124,10 +1105,7 @@ function SetRoute(route) {
         </View>
       )}
       <VirtualizedList
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
+        style={{width: '100%',height: '100%'}}
         renderItem={isOn == false ? renderItem : renderItemAbridged}
         initialNumToRender={isOn == false ? 2 : 5}
         keyExtractor={item => item.numero_recibo}

@@ -68,33 +68,16 @@ export function Appearance() {
         style={Styles.backgroundImage}>
         {/** Cabeçalho da tela: Botão de voltar e título */}
         <View style={Styles.Container}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: '15%',
-            }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '15%'}}>
             <BackButton onPress={handleReturn}/>
-            <Text
-              style={{
-                color: '#000000',
-                fontWeight: '700',
-                fontSize: 18,
-                marginLeft: '15%',
-              }}>
+            <Text style={{ color: '#000000',fontWeight: '700',fontSize: 18, marginLeft: '15%'}}>
               {'Aparência'}
             </Text>
           </View>
         </View>
         {/** Opções */}
         <View style={{marginTop: '5%', paddingHorizontal: '5%'}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: '25%'
-            }}>
+          <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', height: '25%'}}>
             <Text style={Styles.text}>{'Tela de Recibo'}</Text>
             <View style={Styles.containerSetAparencia}>
               <Pressable onPress={decreaseFontSize} style={({pressed}) => [Styles.setPress, {opacity: pressed ? 0.6 : 1}]}>

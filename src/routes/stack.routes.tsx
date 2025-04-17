@@ -21,69 +21,15 @@ export function StackRoutes() {
   return (
     <Navigator>
       {/* Definição de cada tela na pilha de navegação */}
-      <Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="MakeRoute"
-        component={SetRoute}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Receipt"
-        component={NewReceipt}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Relatory"
-        component={Relatory}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Map"
-        component={Map}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Settings"
-        component={Setting}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Printers"
-        component={Printers}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="SettingsReceipt"
-        component={ReceiptSettings}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="SettingsAppearance"
-        component={Appearance}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Screen name="Home" component={Home} options={{headerShown: false}}/>
+      <Screen name="MakeRoute" component={SetRoute} options={{headerShown: false}}/>
+      <Screen name="Receipt" component={NewReceipt} options={{headerShown: false}}/>
+      <Screen name="Relatory" component={Relatory} options={{headerShown: false}}/>
+      <Screen name="Map" component={Map} options={{headerShown: false}}/>
+      <Screen name="Settings" component={Setting} options={{headerShown: false}}/>
+      <Screen name="Printers" component={Printers} options={{headerShown: false}}/>
+      <Screen name="SettingsReceipt" component={ReceiptSettings} options={{headerShown: false}}/>
+      <Screen name="SettingsAppearance" component={Appearance} options={{headerShown: false}}/>
     </Navigator>
   );
 }

@@ -12,7 +12,7 @@ const BackButton = ({onPress}) => {
                 style={{maxWidth: 15, height: 15}}
                 />
                 <Text style={{color: '#2974B4', marginLeft: 5,fontWeight: '700',fontSize: 18,}}>
-                    Voltar
+                    {'Voltar'}
                 </Text>
             </View>
         </Pressable>
