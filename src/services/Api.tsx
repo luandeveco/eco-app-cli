@@ -7,7 +7,8 @@ export const api = axios.create({
   //baseURL: 'http://ipredeeco.ddns.net:6924/api', // IPREDE CE DDNS
 
   baseURL: 'http://206.42.35.216:8698/api', //TESTE LOCAL
-  //baseURL: 'http://192.168.0.169:8698/api'
+  //baseURL: 'http://localhost:8698/api'
+  //baseURL: 'http://192.168.0.169:81/api'
 
    // ------- ANTIGO ------
    //baseURL: "http://gaccba.ddns.net:8081/api", // GACC BA DDNS
